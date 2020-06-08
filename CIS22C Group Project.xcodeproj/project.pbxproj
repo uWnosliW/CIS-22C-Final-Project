@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		64FEE52B248C987F00A25B2F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64FEE52A248C987F00A25B2F /* main.cpp */; };
+		64FEE533248C99C700A25B2F /* Airline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64FEE531248C99C700A25B2F /* Airline.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		64FEE527248C987F00A25B2F /* CIS22C Group Project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CIS22C Group Project"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64FEE52A248C987F00A25B2F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		64FEE531248C99C700A25B2F /* Airline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Airline.cpp; sourceTree = "<group>"; };
+		64FEE532248C99C700A25B2F /* Airline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Airline.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				64FEE52A248C987F00A25B2F /* main.cpp */,
+				64FEE531248C99C700A25B2F /* Airline.cpp */,
+				64FEE532248C99C700A25B2F /* Airline.hpp */,
 			);
 			path = "CIS22C Group Project";
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64FEE533248C99C700A25B2F /* Airline.cpp in Sources */,
 				64FEE52B248C987F00A25B2F /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
