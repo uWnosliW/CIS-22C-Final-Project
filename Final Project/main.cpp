@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "BST.h"
 #include "LinkedList.h"
 int main(int argc, const char * argv[]) {
     // insert code here...
