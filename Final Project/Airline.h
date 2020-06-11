@@ -20,7 +20,7 @@ private:
 public:
     //Ctor
     Airline();
-    Airline(string nme, int scre, string* dest = nullptr, int numDest = 0, double onTime = 0.0, int numAnnComp = 0);
+    Airline(string nme, string* dest = nullptr, int numDest = 0, double onTime = 0.0, int numAnnComp = 0);
     
     //Dtor
     ~Airline() { }

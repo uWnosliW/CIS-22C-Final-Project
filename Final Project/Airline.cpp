@@ -3,7 +3,7 @@
 Airline::Airline() : name(""), score(-1), destinations(nullptr), numDestinations(0), onTimePercentage(0.0),numAnnualComplaints(0)
 { }
 
-Airline::Airline(string nme, int scre, string* dest, int numDest, double onTime, int numAnnComp) : name(nme),destinations(dest) ,numDestinations(numDest), onTimePercentage(onTime), numAnnualComplaints(numAnnComp)
+Airline::Airline(string nme, string* dest, int numDest, double onTime, int numAnnComp) : name(nme),destinations(dest) ,numDestinations(numDest), onTimePercentage(onTime), numAnnualComplaints(numAnnComp)
 {
     score = calculateScore();
 }
