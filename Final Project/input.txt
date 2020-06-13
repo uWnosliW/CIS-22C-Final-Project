@@ -19,7 +19,7 @@ Github Air
 100.0
 5
 UC Air
-11 San_Francisco Merced Berkeley Santa_Barbara Santa_Cruz Los_Angeles Riverside San_Diego Irvine Hicago
+10 San_Francisco Merced Berkeley Santa_Barbara Santa_Cruz Los_Angeles Riverside San_Diego Irvine Hicago
 70.8
 20
 Ivy Air
