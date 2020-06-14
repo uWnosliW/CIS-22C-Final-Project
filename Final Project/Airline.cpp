@@ -60,7 +60,7 @@ bool Airline::operator< (const Airline& obj)
 
 bool Airline::operator== (const Airline& obj)
 {
-    return (score == obj.score);
+    return (name == obj.name);
 }
 
 //const Airline Airline::operator=(const Airline& obj)
