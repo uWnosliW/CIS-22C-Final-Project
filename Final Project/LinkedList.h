@@ -29,6 +29,47 @@ public:
     
     //Getter for head node
     LinkNode<T>* getStart() {return start; }
+    
+    //Insert into linked list in ascending order
+    template<typename T>
+    void SinglyLinkedList<T>::insertAscending(T inputData)
+    {
+        LinkNode<T>* newNode = nullptr;
+        LinkNode<T>* nodePtr = nullptr;
+        LinkNode<T>* previousNode = nullptr;
+
+        newNode = new LinkNode<T>;
+        newNode->data = inputData;
+
+        if (isEmpty())
+        {
+            start = newNode;
+            newNode->next = nullptr;
+            incrementCount();
+        }
+        else
+        {
+            nodePtr = start;
+
+            while (nodePtr != nullptr && nodePtr->data < inputData)
+            {
+                previousNode = nodePtr;
+                nodePtr = nodePtr->next;
+            }
+
+            if (previousNode == nullptr)
+            {
+                start = newNode;
+                newNode->next = nodePtr;
+            } // if target is first node
+            else
+            {
+                previousNode->next = newNode;
+                newNode->next = nodePtr;
+            } // else insert after previous node
+            incrementCount();
+        }
+    }
 
     
     // Description: shows number of elements in the list
