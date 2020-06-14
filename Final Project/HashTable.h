@@ -25,7 +25,7 @@ public:
     //Dtor
     ~HashTable();
     
-    //Conversion operator
+    //Hash function
     const unsigned hash(unsigned key);
     
     //HashTable Operations
