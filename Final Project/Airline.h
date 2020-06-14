@@ -33,7 +33,11 @@ public:
     bool operator> (const Airline& obj);
     bool operator< (const Airline& obj);
     bool operator== (const Airline& obj);
-    const Airline operator= (const Airline& obj);
+    //const Airline operator= (const Airline& obj);
+    friend std::ostream& operator<<(std::ostream& out, Airline& obj);
+    
+    //Conversion Operator
+    operator unsigned() const;
 
 };
 
