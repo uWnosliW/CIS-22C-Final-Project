@@ -27,6 +27,10 @@ public:
     //Dtor
     virtual ~SinglyLinkedList();
     
+    //Getter for head node
+    LinkNode<T>* getStart() {return start; }
+
+    
     // Description: shows number of elements in the list
     // Pre:
     // Post:
