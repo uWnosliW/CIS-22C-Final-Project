@@ -10,23 +10,21 @@ template<typename T, int NumBuckets>
 class HashTable
 {
 private:
-    //SinglyLinkedList<T> array[NumBuckets];
     SinglyLinkedList<T>* array;
     int numBuckets;
     int numBucketsUsed;
     int numNodes;
-    
-    //SinglyLinkedList<T>** buckets_;
+
+private:
     void resize();
+    const unsigned hash(unsigned key);
+    
 public:
     //Ctor
     HashTable();
     
     //Dtor
     ~HashTable();
-    
-    //Hash function
-    const unsigned hash(unsigned key);
     
     //HashTable Operations
     void insert(T inputData);
@@ -43,15 +41,8 @@ public:
 };
 
 template<typename T, int NumBuckets>
-HashTable<T,NumBuckets>::HashTable() : numBuckets(NumBuckets),numBucketsUsed(0),numNodes(0)
-{
-    array = new SinglyLinkedList<T>[numBuckets];
-    
-}
-
-//template<typename T, int NumBuckets>
-//HashTable<T,NumBuckets>::HashTable() : numBuckets(NumBuckets), numBucketsUsed(0),numNodes(0), buckets_(new SinglyLinkedList<T>*[numBuckets])
-//{ }
+HashTable<T,NumBuckets>::HashTable() : numBuckets(NumBuckets),numBucketsUsed(0),numNodes(0), array(new SinglyLinkedList<T>[NumBuckets])
+{ }
 
 template<typename T, int NumBuckets>
 HashTable<T,NumBuckets>::~HashTable()
@@ -63,39 +54,32 @@ HashTable<T,NumBuckets>::~HashTable()
 template<typename T, int NumBuckets>
 void HashTable<T, NumBuckets>::insert(T inputData)
 {
-    if (getLoadFactor() > 0.75)
+    if (getLoadFactor() >= 0.75)
     {
-        //resize();
+        resize();
         //std::cout<<"resized to: " << numBuckets << std::endl;
         auto index = hash(inputData);
-
-        if ( array[index].isEmpty() )
+        
+        if (array[index].isEmpty())
         {
-            array[index].insertAscending(inputData);
-            numNodes++;
             numBucketsUsed++;
-        } // No collision
-        else
-        {
-            array[index].insertAscending(inputData);
-            numNodes++;
-        } // Collision
+        } //No collision
+        
+        array[index].insertAscending(inputData);
+        numNodes++;
+
     } // Resize needed
     else
     {
         auto index = hash(inputData);
 
-        if ( array[index].isEmpty() )
+        if (array[index].isEmpty())
         {
-            array[index].insertAscending(inputData);
-            numNodes++;
             numBucketsUsed++;
-        } // No collision
-        else
-        {
-            array[index].insertAscending(inputData);
-            numNodes++;
-        } // Collision
+        } //No collision
+        
+        array[index].insertAscending(inputData);
+        numNodes++;
     } // No resize needed
     
 }
@@ -103,28 +87,24 @@ void HashTable<T, NumBuckets>::insert(T inputData)
 template<typename T, int NumBuckets>
 void HashTable<T,NumBuckets>::resize()
 {
-    std::cout<<"Resize called"<<std::endl;
     SinglyLinkedList<T>* temp = new SinglyLinkedList<T>[2*numBuckets];
-    
-    for (auto i = 0; i < numBuckets; i++) // for the old array of lists
+    numBuckets*=2;
+
+    for (auto i = 0; i < numBuckets/2; i++) // for the old array of lists
     {
         //Traverse down each node of the list
-        for (auto i = 0; i < array[i].getCount(); i++)
+        //Get data from each node and hash it, then insert into new array
+        LinkNode<T>* nodePtr = nullptr;
+        nodePtr = array[i].getStart();
+        
+        while (nodePtr != nullptr)
         {
-            //Get data from each node and hash it, then insert into new array
-            LinkNode<T>* nodePtr = nullptr;
-            nodePtr = array[i].getStart();
+            auto index = hash(nodePtr->data);
+            temp[index].insertAscending(nodePtr->data);
             
-            while (nodePtr != nullptr)
-            {
-                auto index = hash(nodePtr->data);
-                temp[index].insertAscending(nodePtr->data);
-                
-                nodePtr = nodePtr->next;
-            }
+            nodePtr = nodePtr->next;
         }
     }
-    numBuckets*=2;
     delete [] array;
     array = temp;
 }
@@ -137,7 +117,8 @@ bool HashTable<T,NumBuckets>::find(T inputData)
     
     if( array[index].isEmpty())
        return false;
-    else return ( array[index].find(inputData) != 0 );
+    else
+        return ( array[index].find(inputData) != 0 );
 }
 
 template<typename T, int NumBuckets>
@@ -167,7 +148,8 @@ void HashTable<T,NumBuckets>::remove(T inputData)
 template<typename T, int NumBuckets>
 const unsigned HashTable<T,NumBuckets>::hash(unsigned key)
 {
-    return key % NumBuckets;
+    //std::cout<<"key: " << key << " hash: " << key%numBuckets << std::endl;
+    return key % numBuckets;
 }
 
 template<typename T, int NumBuckets>
@@ -175,7 +157,7 @@ void HashTable<T,NumBuckets>::print()
 {
     for (auto i = 0; i < numBuckets; i++)
     {
-        std::cout << "Bucket " << i+1 << " :";
+        std::cout << "Bucket " << i+1 << " :" << std::endl;
         array[i].print();
     }
 }
