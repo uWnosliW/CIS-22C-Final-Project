@@ -63,15 +63,42 @@ bool Airline::operator== (const Airline& obj)
     return (score == obj.score);
 }
 
-const Airline Airline::operator=(const Airline& obj)
+//const Airline Airline::operator=(const Airline& obj)
+//{
+//    name = obj.name;
+//    score = obj.score;
+//    numDestinations = obj.numDestinations;
+//    for (auto i = 0; i < numDestinations; i++)
+//        destinations[i] = obj.destinations[i];
+//    onTimePercentage = obj.onTimePercentage;
+//    numAnnualComplaints = obj.numAnnualComplaints;
+//    
+//    return *this;
+//}
+
+Airline::operator unsigned() const
 {
-    name = obj.name;
-    score = obj.score;
-    numDestinations = obj.numDestinations;
-    for (auto i = 0; i < numDestinations; i++)
-        destinations[i] = obj.destinations[i];
-    onTimePercentage = obj.onTimePercentage;
-    numAnnualComplaints = obj.numAnnualComplaints;
+    static unsigned primes[26] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101};
+    unsigned product = 1;
     
-    return *this;
+    for (auto i = 0; i < name.length(); i++)
+    {
+        product *= primes[tolower(name[i]) - 'a'];
+    }
+    
+    return product;
+}
+
+std::ostream& operator<<(std::ostream& out, Airline& obj)
+{
+    out << "Airline name: " << obj.name << std::endl;
+    out << "Score: " << obj.score << std::endl;
+//    out << "Destinations: ";
+//    for (auto i = 0; i < obj.numDestinations; i++)
+//        out << obj.destinations[i] << " ";
+//    out << std::endl;
+//    out << "On Time Percentage: " << obj.onTimePercentage*100.0 << "%" << std::endl;
+//    out << "Number of Annual Complaints: " << obj.numAnnualComplaints << std::endl;
+    
+    return out;
 }
