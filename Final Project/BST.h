@@ -10,11 +10,44 @@ class BST
 private:
     BSTNode<T>* root;
     int count;
+    
+    // Description: finds a specific object in the BST
+    // Pre: BSTNode<T>* nodePtr - root node
+    //      T inputData - object to find
+    // Post:
+    // Return: pointer to BSTNode if found, nullptr otherwise
     BSTNode<T>* search(BSTNode<T>* nodePtr, T inputData) const;
+    
+    // Description: finds a specific object in the BST
+    // Pre: BSTNode<T>* nodePtr - root node
+    //      T inputData - object to find
+    // Post:
+    // Return: pointer to BSTNode if found, nullptr otherwise
     void insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode);
-    void printInOrder(BSTNode<T>* nodePtr) const;
-    void printPreOrder(BSTNode<T>* nodePtr) const;
-    void printPostOrder(BSTNode<T>* nodePtr) const;
+    
+    // Description: finds a specific object in the BST
+    // Pre: BSTNode<T>* nodePtr - root node
+    //      T inputData - object to find
+    // Post:
+    // Return: pointer to BSTNode if found, nullptr otherwise
+    void printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const;
+    
+    // Description: Prints BST preorder
+    // Pre:
+    // Post:
+    // Return:
+    void printPreOrder(BSTNode<T>* nodePtr, std::ostream &out) const;
+    
+    // Description: Prints BST preorder
+    // Pre:
+    // Post:
+    // Return:
+    void printPostOrder(BSTNode<T>* nodePtr, std::ostream &out) const;
+  
+    // Description: Prints BST preorder
+    // Pre:
+    // Post:
+    // Return:
     void remove(T inData, BSTNode<T>*& nodePtr);
     
 public:
@@ -25,15 +58,57 @@ public:
     ~BST() { clear(root); }
     
     //BST Operations
+    // Description: calls helper function
+    // Pre:
+    // Post:
+    // Return:
     BSTNode<T>* search(T inputData) const { return search(root, inputData); }
     void insertNode(T inputData);
     void deleteNode(T inputData);
-    void printInOrder() const { printInOrder(root); }
-    void printPreOrder() const { printPreOrder(root); }
-    void printPostOrder() const { printPostOrder(root); }
-    void printBreadthFirst() const;
+    
+    // Description: calls helper function
+    // Pre:
+    // Post:
+    // Return:
+    void printInOrder(std::ostream &out = std::cout) const { printInOrder(root,out); }
+    
+    // Description: calls helper function
+    // Pre:
+    // Post:
+    // Return:
+    void printPreOrder(std::ostream &out = std::cout) const { printPreOrder(root,out); }
+    
+    // Description: calls helper function
+    // Pre:
+    // Post:
+    // Return:
+    void printPostOrder(std::ostream &out = std::cout) const { printPostOrder(root,out); }
+    
+    // Description: prints BST in order
+    // Pre:
+    // Post:
+    // Return:
+    void printBreadthFirst(std::ostream &out = std::cout) const;
+    
+    
+    // Description: shows how many nodes are in the BST
+    // Pre:
+    // Post:
+    // Return: number of nodes
     int getCount() const { return count; }
+    
+    
+    // Description: shows if BST is empty
+    // Pre:
+    // Post:
+    // Return: true if BST is empty
     bool isEmpty() const { return count == 0; }
+    
+    
+    // Description: deletes all BSTNodes
+    // Pre:
+    // Post: deletes all BSTNodes count set to 0
+    // Return:
     void clear(BSTNode<T>* nodePtr);
 };
 template <typename T>
@@ -57,31 +132,25 @@ BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData) const
 template<typename T>
 void BST<T>::insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode)
 {
-    //std::cout << "newnode incoming: " << *newNode;
-    if (nodePtr == nullptr)
+    BSTNode<T>* curr = nodePtr;
+    if(curr == nullptr)
     {
-        nodePtr = newNode;
-        //std::cout << "insert success: " << *nodePtr;
-        //std::cout << "inserted into: " << nodePtr << " left: " << nodePtr->getLeft() << " right: " << nodePtr->getRight() << std::endl;
-        
-        //std::cout << std::endl;
-        
-    } // insert node if no node in place
-    else if (newNode->getData() < nodePtr->getData())
+        root = newNode;
+        return;
+    }
+    while((newNode -> getData() < curr -> getData() && curr -> getLeft() != nullptr) ||
+          (newNode -> getData() > curr -> getData() && curr -> getRight() != nullptr))
     {
-        //std::cout << "search left" << std::endl;
-        //std::cout <<"searching: " << nodePtr << std::endl;
-        
-        insert(nodePtr->getLeft(), newNode);
-    } // search left subtree
+        curr = (newNode -> getData() < curr -> getData())? curr -> getLeft(): curr->getRight();
+    }
+    if(newNode -> getData() < curr -> getData())
+    {
+        curr -> setLeft(newNode);
+    }
     else
     {
-        //std::cout << "search right" << std::endl;
-        //std::cout <<"sitting in: " << nodePtr << std::endl;
-
-        //std::cout << "going to right: " << nodePtr->getRight() << std::endl;
-        insert(nodePtr->getRight(), newNode);
-    } // search right subtree
+        curr -> setRight(newNode);
+    }
 }
 
 template<typename T>
@@ -95,37 +164,37 @@ void BST<T>::insertNode(T inputData)
     insert(root, newNode);
 }
 template<typename T>
-void BST<T>::printInOrder(BSTNode<T>* nodePtr) const
+void BST<T>::printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const
 {
     if (nodePtr != nullptr)
     {
-        printInOrder(nodePtr->getLeft());
-        std::cout << nodePtr->getData() << std::endl;
-        printInOrder(nodePtr->getRight());
+        printInOrder(nodePtr->getLeft(),out);
+        out << nodePtr->getData() << std::endl;
+        printInOrder(nodePtr->getRight(),out);
     }
 }
 template<typename T>
-void BST<T>::printPreOrder(BSTNode<T>* nodePtr) const
+void BST<T>::printPreOrder(BSTNode<T>* nodePtr, std::ostream &out) const
 {
     if (nodePtr != nullptr)
     {
-        std::cout << nodePtr->getData() << std::endl;
-        printPreOrder(nodePtr->getLeft());
-        printPreOrder(nodePtr->getRight());
+        out << nodePtr->getData() << std::endl;
+        printPreOrder(nodePtr->getLeft(),out);
+        printPreOrder(nodePtr->getRight(),out);
     }
 }
 template<typename T>
-void BST<T>::printPostOrder(BSTNode<T>* nodePtr) const
+void BST<T>::printPostOrder(BSTNode<T>* nodePtr, std::ostream &out) const
 {
     if (nodePtr != nullptr)
     {
-        printPostOrder(nodePtr->getLeft());
-        printPostOrder(nodePtr->getRight());
-        std::cout << nodePtr->getData() << std::endl;
+        printPostOrder(nodePtr->getLeft(),out);
+        printPostOrder(nodePtr->getRight(),out);
+        out << nodePtr->getData() << std::endl;
     }
 }
 template<typename T>
-void BST<T>::printBreadthFirst() const
+void BST<T>::printBreadthFirst(std::ostream &out) const
 {
     Queue<BSTNode<T>*> next;
     BSTNode<T>* curr;
@@ -133,7 +202,7 @@ void BST<T>::printBreadthFirst() const
     while(!next.isEmpty())
     {
         curr = next.peekFront();
-        std::cout<<curr->getData()<<std::endl;
+        out<<curr->getData()<<std::endl;
         next.dequeue();
         if(curr->getLeft())
         {
@@ -161,52 +230,84 @@ void BST<T>::clear(BSTNode<T>* nodePtr)
 template<typename T>
 void BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
 {
-    if (inData < nodePtr->getData())
+    //cout<<"Removing "<<nodePtr -> getData()<<" "<<nodePtr -> getLeft()<<" "<<nodePtr->getRight()<<endl;
+    BSTNode<T>* prev = nullptr;
+    BSTNode<T>* curr = nodePtr;
+    while(curr != nullptr)
     {
-        remove(inData, nodePtr->getLeft());
-    } // search left
-    else if (inData > nodePtr->getData())
-    {
-        remove(inData, nodePtr->getRight());
-    } // search right
-    else
-    {
-        BSTNode<T>* temp = nullptr;
-        
-        if (nodePtr == nullptr)
+        //cout<<curr -> getData()<<curr -> getLeft()<<" "<<curr -> getRight()<<" "<<prev<<endl;
+        if(inData > curr->getData())
         {
-            std::cerr << "Unable to delete empty node" << std::endl;
-        } // if node is empty
-        else if (nodePtr->getRight() == nullptr)
+            prev = curr;
+            curr = curr->getRight();
+        }
+        else if(inData < curr->getData())
         {
-            temp = nodePtr;
-            nodePtr = nodePtr->getLeft();
-            delete temp;
-        } // if right child is empty
-        else if (nodePtr->getLeft() == nullptr)
-        {
-            temp = nodePtr;
-            nodePtr = nodePtr->getRight();
-            delete temp;
-        } //if left child is empty
+            prev = curr;
+            curr = curr->getLeft();
+        }
         else
         {
-            temp = nodePtr->getRight();
-            while (temp->getLeft())
+            if (curr -> getLeft() == nullptr && curr -> getRight() == nullptr)
             {
-                temp = temp->getLeft();
+               if (prev == nullptr)
+               {
+                   nodePtr = nullptr;
+               }
+               else if (prev -> getLeft() == curr)
+               {
+                   prev -> setLeft(nullptr);
+               }
+               else
+               {
+                   prev -> setRight(nullptr);
+               }
             }
-            // attach left subtree
-            temp->setLeft(nodePtr->getLeft());
-            temp = nodePtr;
-            
-            //attach right subtree
-            temp->setRight(nodePtr->getRight());
-            delete temp;
-            
-        } // if node has 2 children
-            
-    } // delete data and re-attach tree
+            else if (curr -> getLeft() != nullptr && curr -> getRight() == nullptr)
+            {
+                if (prev == nullptr)
+                {
+                     nodePtr = curr->getLeft();
+                }
+                else if (prev->getLeft() == curr)
+                {
+                    prev->setLeft(curr->getLeft());
+                }
+                else
+                {
+                    prev->setRight(curr->getLeft());
+                }
+            }
+            else if (curr->getLeft() == nullptr && curr->getRight() != nullptr)
+            {
+               if (prev == nullptr)
+               {
+                   nodePtr = curr -> getRight();
+               }
+               else if (prev->getLeft() == curr)
+               {
+                   prev->setLeft(curr->getRight());
+               }
+               else
+               {
+                   prev->setRight(curr->getRight());
+               }
+            }
+            else {
+                BSTNode<T>* next = curr->getRight();
+                while (next->getLeft() != nullptr)
+                {
+                    next = next -> getLeft();
+                }
+                T tempData = next -> getData();
+                remove(tempData, nodePtr);
+                curr->setData(tempData);
+            }
+            return;
+             // Node found and removed
+        }
+    }
+    return;
 }
 
 template<typename T>
