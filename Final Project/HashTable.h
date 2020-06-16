@@ -155,8 +155,11 @@ void HashTable<T,NumBuckets>::print()
 {
     for (auto i = 0; i < numBuckets; i++)
     {
-        std::cout << "Bucket " << i+1 << " :" << std::endl;
-        array[i].print();
+        if(!array[i].isEmpty())
+        {
+            std::cout << "Bucket " << i+1 << " :" << std::endl;
+            array[i].print();
+        }
     }
 }
 

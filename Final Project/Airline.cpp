@@ -15,16 +15,26 @@ Airline::Airline(const Airline& obj) : name(obj.name), score(obj.score), numDest
         destinations[i] = obj.destinations[i];
     }
 }
-void Airline::printStats()
+void Airline::printStats(std::ostream& out)
 {
-    cout << "Airline name: " << name << endl;
-    cout << "Score: " << score << endl;
-    cout << "Destinations: ";
+    out << "Airline name: " << name << endl;
+    out << "Score: " << score << endl;
+    out << "Destinations: ";
     for (auto i = 0; i < numDestinations; i++)
-        cout << destinations[i] << " ";
-    cout << endl;
-    cout << "On Time Percentage: " << onTimePercentage*100.0 << "%" << endl;
-    cout << "Number of Annual Complaints: " << numAnnualComplaints << endl;
+        out << destinations[i] << " ";
+    out << endl;
+    out << "On Time Percentage: " << onTimePercentage*100.0 << "%" << endl;
+    out << "Number of Annual Complaints: " << numAnnualComplaints << endl;
+}
+void Airline::printObject(std::ostream& out)
+{
+    out << name << endl;
+    out << numDestinations<<" ";
+    for (auto i = 0; i < numDestinations; i++)
+        out << destinations[i] << " ";
+    out << endl;
+    out << onTimePercentage << endl;
+    out << numAnnualComplaints << endl;
 }
 
 double Airline::calculateScore()

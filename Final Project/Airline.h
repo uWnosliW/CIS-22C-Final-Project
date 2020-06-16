@@ -27,7 +27,23 @@ public:
     ~Airline() { }
     
     //Member functions
-    void printStats();
+    
+    // Description: prints out all important airline information
+    // Pre: std::ostream& out - output stream
+    // Post: pushes everything into ostream buffer
+    // Return:
+    void printStats(std::ostream& out = std::cout);
+    
+    // Description: prints out all important airline information
+    // Pre: std::ostream& out - output stream
+    // Post: pushes everything into ostream buffer
+    // Return:
+    void printObject(std::ostream& out = std::cout);
+    
+    // Description: calculates airline score
+    // Pre:
+    // Post:
+    // Return: score of airline
     double calculateScore();
     string getKey() {return name; }
     //Overloaded Operators

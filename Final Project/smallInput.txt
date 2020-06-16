@@ -1,24 +1,52 @@
 United Airlines
-5 San_Jose San_Francisco New_York_City Boston Houston
-80.0
+5 San_Jose San_Francisco New_York_City Boston Houston 
+80
 500
 Virgin Airlines
-2 Shanghai London
-40.0
+2 Shanghai London 
+40
 20000
 American Airlines
-11 Shanghai London San_Jose San_Francisco New_York_City Boston Houston Beijing Melbourn Paris Washington_DC
+11 Shanghai London San_Jose San_Francisco New_York_City Boston Houston Beijing Melbourn Paris Washington_DC 
 99.9
 5
 China Eastern
-9 Shanghai Beijing Hebei San_Francisco New_York_City London Berlin Munich Hamburg
-80.0
+9 Shanghai Beijing Hebei San_Francisco New_York_City London Berlin Munich Hamburg 
+80
 20
-Github Air
-3 Pull_City Push_City Commit_City
-100.0
-5
 UC Air
-10 San_Francisco Merced Berkeley Santa_Barbara Santa_Cruz Los_Angeles Riverside San_Diego Irvine Hicago
+10 San_Francisco Merced Berkeley Santa_Barbara Santa_Cruz Los_Angeles Riverside San_Diego Irvine Hicago 
 70.8
 20
+Ivy Air
+8 Brown Harvard UPenn Dartmouth Columbia Princeton Cornell Yale 
+1
+1000000000
+Big City Air
+6 Los_Angeles New_York_City Chigaco Houston Phoenix Philadelphia 
+30
+192
+Apple Air
+4 Apple_Watch iPad iPhone iMac 
+40
+298
+Royal Dutch Airlines
+6 Arnemuiden Goes Hulst Middelburg Sluis Terneuzen 
+80.5
+50
+Virgin Atlantic Airlines
+3 Shanghai London Boston 
+44
+200
+Cathy Pacific Airlines
+15 Shanghai London San_Jose San_Francisco Berlin New_York_City Boston Singapore Houston Taipei Beijing Melbourn Paris Washington_DC Freemont 
+93.9
+203
+China Southern
+7 Shanghai Beijing Hebei London Berlin Munich Hamburg 
+82
+85
+De Anza Air
+5 Math English Physics Engineering CIS 
+37
+38

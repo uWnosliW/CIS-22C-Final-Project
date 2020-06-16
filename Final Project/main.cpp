@@ -76,6 +76,7 @@ int main(int argc, const char * argv[]) {
         }
         size++;
     }
+    airInput.close();
     cout<<"Type insert followed by an Airline object on the next line to update the database. Type delete, search, or print stats followed by the name of an Airline on the next line to check the database and display all airline information. Type display hash table, display in order, print indented tree, print efficiency to display Airlines in various formats. Type quit to exit the program."<<endl;
     string input;
     getline(cin,input);
@@ -84,11 +85,9 @@ int main(int argc, const char * argv[]) {
         if(input == "insert")
         {
             std::string name,space;
-            getline(cin,space);
             int numDestTemp,numAnnualCompTemp;
             double onTimePercentage;
             getline(cin,name);
-            cout<<name<<endl;
             cin >> numDestTemp;
             string* destListTemp = new string[numDestTemp];
             int counter = 0;
@@ -130,6 +129,7 @@ int main(int argc, const char * argv[]) {
             std::string name;
             getline(cin,name);
             Airline temp = hashtable.find(Airline(name));
+            bst.search(temp);
             if(!(temp == Airline()))
             {
                 cout<<temp<<endl;
@@ -156,7 +156,7 @@ int main(int argc, const char * argv[]) {
         }
         else if(input == "display hash table")
         {
-            
+            hashtable.print();
         }
         else if(input == "display in order")
         {
@@ -168,9 +168,31 @@ int main(int argc, const char * argv[]) {
         }
         else if(input == "print efficiency")
         {
-            
+            cout<<"Hash table"<<endl;
+            cout<<"load factor: "<<hashtable.getLoadFactor()<<endl;
+            cout<<"longest linked list:"<<hashtable.getLongestList()<<endl;
+            cout<<"BST"<<endl;
+            cout<<"Average operations per insertion: "<<bst.getInsertionOperations()*1.0/bst.getInsertionQueries()<<endl;
+            if(bst.getSearchQueries()>0)
+            {
+                cout<<"Average operations per search: "<<bst.getSearchOperations()*1.0/bst.getSearchQueries()<<endl;
+            }
+            else
+            {
+                cout<<"No searches have been made yet."<<endl;
+            }
+        }
+        else
+        {
+            cout<<"Unrecognized command."<<endl;
         }
         getline(cin,input);
+    }
+    ofstream airOutput(fileName);
+    while(!linkedlist.isEmpty())
+    {
+        linkedlist.getStart()->data.printObject(airOutput);
+        linkedlist.deleteNode(linkedlist.getStart()->data);
     }
     system("pause");
     return 0;

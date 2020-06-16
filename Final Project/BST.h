@@ -20,7 +20,7 @@ private:
     //      T inputData - object to find
     // Post:
     // Return: pointer to BSTNode if found, nullptr otherwise
-    BSTNode<T>* search(BSTNode<T>* nodePtr, T inputData) const;
+    BSTNode<T>* search(BSTNode<T>* nodePtr, T inputData);
     
     // Description: finds a specific object in the BST
     // Pre: BSTNode<T>* nodePtr - root node
@@ -52,7 +52,7 @@ private:
     // Pre:
     // Post:
     // Return:
-    void printIndentedTree(int level, BSTNode<T>* nodePtr, std::ostream &out = std::cout) const;
+    void printIndentedTree(int level, int parentLevel, bool left, BSTNode<T>* nodePtr, std::ostream &out = std::cout) const;
     
     // Description: Prints BST preorder
     // Pre:
@@ -77,7 +77,7 @@ public:
     // Pre:
     // Post:
     // Return:
-    BSTNode<T>* search(T inputData) const
+    BSTNode<T>* search(T inputData)
     {
         searchQueries++;
         return search(root, inputData);
@@ -114,7 +114,7 @@ public:
     // Pre:
     // Post:
     // Return:
-    void printIndentedTree(int level = 0, std::ostream &out = std::cout) const {printIndentedTree(0, root,out);}
+    void printIndentedTree(int level = 0, std::ostream &out = std::cout) const {printIndentedTree(0,0,false, root,out);}
     
     // Description: shows how many nodes are in the BST
     // Pre:
@@ -138,7 +138,7 @@ public:
     void clear(BSTNode<T>* nodePtr);
 };
 template <typename T>
-BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData) const
+BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData)
 {
     searchOperations++;
     T data = nodePtr->getData();
@@ -160,6 +160,7 @@ BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData) const
 template<typename T>
 void BST<T>::insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode)
 {
+    insertionOperations++;
     BSTNode<T>* curr = nodePtr;
     if(curr == nullptr)
     {
@@ -206,20 +207,36 @@ void BST<T>::printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     }
 }
 template<typename T>
-void BST<T>::printIndentedTree(int level, BSTNode<T>* nodePtr, std::ostream &out) const
+void BST<T>::printIndentedTree(int level, int parentLevel, bool left, BSTNode<T>* nodePtr, std::ostream &out) const
 {
     if (nodePtr != nullptr)
     {
-        printIndentedTree(level+1, nodePtr->getRight(),out);
-        string space = "                  ";
+        printIndentedTree(level+1, level, false, nodePtr->getRight(),out);
+        string dash = "--------------";
+        string space = "              ";
         string spacing = "";
-        for(int i=0;i<level;i++)
+        for(int i=0;i<parentLevel;i++)
         {
             spacing+= space;
         }
+        if(level>parentLevel)
+        {
+            if(left)
+            {
+                spacing+="         \\------";
+            }
+            else
+            {
+                spacing+="         /------";
+            }
+            for(int i=0;i<level-parentLevel-1;i++)
+            {
+                spacing+=space;
+            }
+        }
         std::string t = nodePtr->getData().getKey();
         out << spacing<< t << std::endl;
-        printIndentedTree(level+1, nodePtr->getLeft(),out);
+        printIndentedTree(level+1, level, true, nodePtr->getLeft(),out);
     }
 }
 template<typename T>
