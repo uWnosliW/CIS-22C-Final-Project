@@ -1,10 +1,4 @@
-//
-//  LinkedNode.h
-//  Lab 4
-//
-//  Created by Wilson Wu on 6/1/20.
-//  Copyright © 2020 None. All rights reserved.
-//
+//Wilson
 
 #ifndef LinkNode_h
 #define LinkNode_h

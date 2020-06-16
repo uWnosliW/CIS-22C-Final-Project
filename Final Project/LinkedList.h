@@ -1,6 +1,4 @@
-//Wilson Wu and Keith
-//Lab 4
-//Implement Stacks and Queues as derived classes of Linked List
+//Wilson ueues as derived classes of Linked List
 
 #ifndef LinkedList_h
 #define LinkedList_h

@@ -1,11 +1,4 @@
-//
-//  main.cpp
-//  Final Project
-//
-//  Created by Wilson Wu on 6/2/20.
-//  Copyright © 2020 None. All rights reserved.
-//
-
+//Yi-wei and Hairun
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -15,10 +8,10 @@
 #include "LinkedList.h"
 using namespace std;
 int main(int argc, const char * argv[]) {
-    string fileName = "/Users/Wilson/Documents/Final Project/Final Project/smallInput.txt";
+    string fileName = "/Users/Wilson/Documents/Final Project/Final Project/input.txt";
     ifstream airInput(fileName);
     SinglyLinkedList<Airline> linkedlist;
-    HashTable<Airline, 50> hashtable;
+    HashTable<Airline, 20> hashtable;
     BST<Airline> bst;
     Airline airlines[50];
     if (!airInput)

@@ -1,7 +1,4 @@
-//Wilson Wu and Keith
-//Lab 4
-//Implement Stacks and Queues as derived classes of Linked List
-
+//Wilson Wu 
 #ifndef Queue_h
 #define Queue_h
 #include "LinkedList.h"
