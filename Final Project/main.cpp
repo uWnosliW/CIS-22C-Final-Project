@@ -13,6 +13,7 @@
 #include "BST.h"
 #include "LinkedList.h"
 using namespace std;
+void printEfficiency();
 int main(int argc, const char * argv[]) {
     string fileName = "/Users/Wilson/Documents/Final Project/Final Project/input.txt";
     ifstream airInput(fileName);
@@ -75,8 +76,8 @@ int main(int argc, const char * argv[]) {
         }
         size++;
     }
-    //bst.printIndentedTree();
-    cout<<bst.getSearchQueries()<<" "<<bst.getSearchOperations()<<" "<<bst.getInsertionQueries()<<" "<<bst.getInsertionOperations()<<endl;
+    
     system("pause");
     return 0;
 }
+

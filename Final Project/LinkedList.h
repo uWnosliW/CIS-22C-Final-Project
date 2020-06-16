@@ -17,12 +17,16 @@ class SinglyLinkedList
 {
 protected:
     int count;
+    int searchQueries;
+    int searchOperations;
+    int insertionQueries;
+    int insertionOperations;
     LinkNode<T>* start;
     LinkNode<T>* end;
     
 public:
     //Ctor
-    SinglyLinkedList() : count(0), start(nullptr), end(nullptr) { }
+    SinglyLinkedList() : count(0), start(nullptr), end(nullptr), searchQueries(0), searchOperations(0), insertionQueries(0), insertionOperations(0) { }
     
     //Dtor
     virtual ~SinglyLinkedList();
@@ -122,6 +126,7 @@ public:
 template <typename T>
 T SinglyLinkedList<T>::find(T obj)
 {
+    searchQueries++;
     if (isEmpty())
         return T();
     else
@@ -131,11 +136,13 @@ T SinglyLinkedList<T>::find(T obj)
         
         while (nodePtr != nullptr)
         {
+            searchOperations++;
             if (nodePtr->data == obj)
                 return nodePtr->data;
             
             nodePtr = nodePtr->next;
         }
+        searchOperations++;
         return T();
     }
 }
@@ -256,6 +263,7 @@ void SinglyLinkedList<T>::appendNode(T inputData)
 template <typename T>
 void SinglyLinkedList<T>::insertNode(T obj, T inputData)
 {
+    insertionQueries++;
     if(end -> data == obj)
     {
         appendNode(inputData);
@@ -265,10 +273,12 @@ void SinglyLinkedList<T>::insertNode(T obj, T inputData)
         LinkNode<T>* currNode = start; //Get to correct index
         while(currNode->data!=obj)
         {
+            insertionOperations++;
             if (currNode->next == nullptr)
                 break;
             currNode = currNode -> next;
         }
+        insertionOperations++;
         LinkNode<T>* newNode = new LinkNode<T>;//insert new LinkNode
         newNode -> data = inputData;
         newNode -> next = currNode -> next;
