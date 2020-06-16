@@ -11,7 +11,10 @@ class BST
 private:
     BSTNode<T>* root;
     int count;
-    
+    int searchQueries;
+    int searchOperations;
+    int insertionQueries;
+    int insertionOperations;
     // Description: finds a specific object in the BST
     // Pre: BSTNode<T>* nodePtr - root node
     //      T inputData - object to find
@@ -59,17 +62,27 @@ private:
     
 public:
     //Ctor
-    BST() : root(nullptr),count(0) { }
+    BST() : root(nullptr),count(0),searchQueries(0), searchOperations(0), insertionQueries(0), insertionOperations(0) { }
     
     //Dtor
     ~BST() { clear(root); }
+    
+    int getSearchQueries() const {return searchQueries;}
+    int getSearchOperations() const {return searchOperations;}
+    int getInsertionQueries() const {return insertionQueries;}
+    int getInsertionOperations() const {return insertionOperations;}
     
     //BST Operations
     // Description: calls helper function
     // Pre:
     // Post:
     // Return:
-    BSTNode<T>* search(T inputData) const { return search(root, inputData); }
+    BSTNode<T>* search(T inputData) const
+    {
+        searchQueries++;
+        return search(root, inputData);
+    }
+    
     void insertNode(T inputData);
     void deleteNode(T inputData);
     
@@ -117,6 +130,7 @@ public:
     bool isEmpty() const { return count == 0; }
     
     
+    
     // Description: deletes all BSTNodes
     // Pre:
     // Post: deletes all BSTNodes count set to 0
@@ -126,6 +140,7 @@ public:
 template <typename T>
 BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData) const
 {
+    searchOperations++;
     T data = nodePtr->getData();
     //std::cout<<"searching "<<data<<endl;
     if(data == inputData)
@@ -154,6 +169,7 @@ void BST<T>::insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode)
     while((newNode -> getData() < curr -> getData() && curr -> getLeft() != nullptr) ||
           (newNode -> getData() > curr -> getData() && curr -> getRight() != nullptr))
     {
+        insertionOperations++;
         curr = (newNode -> getData() < curr -> getData())? curr -> getLeft(): curr->getRight();
     }
     //Airline temp = newNode->getData(), temp2 = curr -> getData();
@@ -172,7 +188,7 @@ template<typename T>
 void BST<T>::insertNode(T inputData)
 {
     BSTNode<T>* newNode = nullptr;
-    
+    insertionQueries++;
     newNode = new BSTNode<T>(inputData);
     count++;
     //std::cout << "Create new node obj for " << inputData << std::endl;
@@ -351,5 +367,4 @@ void BST<T>::deleteNode(T inputData)
     count--;
     remove(inputData, root);
 }
-
 #endif /* BST_h */

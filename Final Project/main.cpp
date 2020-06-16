@@ -14,7 +14,7 @@
 #include "LinkedList.h"
 using namespace std;
 int main(int argc, const char * argv[]) {
-    string fileName = "/Users/Wilson/Documents/Final Project/Final Project/smallInput.txt";
+    string fileName = "/Users/Wilson/Documents/Final Project/Final Project/input.txt";
     ifstream airInput(fileName);
     SinglyLinkedList<Airline> linkedlist;
     HashTable<Airline, 50> hashtable;
@@ -75,7 +75,8 @@ int main(int argc, const char * argv[]) {
         }
         size++;
     }
-    bst.printIndentedTree();
+    //bst.printIndentedTree();
+    cout<<bst.getSearchQueries()<<" "<<bst.getSearchOperations()<<" "<<bst.getInsertionQueries()<<" "<<bst.getInsertionOperations()<<endl;
     system("pause");
     return 0;
 }
