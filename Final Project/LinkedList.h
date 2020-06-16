@@ -1,4 +1,4 @@
-//Wilson ueues as derived classes of Linked List
+//Wilson ueues as derived classes of Linked List and Yi-Wei
 
 #ifndef LinkedList_h
 #define LinkedList_h
@@ -21,104 +21,110 @@ protected:
     int insertionOperations;
     LinkNode<T>* start;
     LinkNode<T>* end;
-    
+
 public:
     //Ctor
     SinglyLinkedList() : count(0), start(nullptr), end(nullptr), searchQueries(0), searchOperations(0), insertionQueries(0), insertionOperations(0) { }
-    
+
     //Dtor
     virtual ~SinglyLinkedList();
-    
+
     //Getter for head node
     LinkNode<T>* getStart() {return start; }
-    
+
     //Insert into linked list in ascending order
     void insertAscending(T inputData);
-    
+
     // Description: shows number of elements in the list
     // Pre:
     // Post:
     // Return: length of list
     int getCount() { return count; }
-    
+
     //Setters
     // Description: increments length of list
     // Pre:
     // Post: adds 1 to count
     // Return:
     void incrementCount() { count++; }
-    
+
     // Description: decrements length of list
     // Pre:
     // Post: subtract 1 from count
     // Return:
     void decrementCount() { count--; }
-    
+
     //Generic List type implementation functions
-    
-    
+
+
     // Description: increments length of list
     // Pre:
     // Post: adds 1 to count
     // Return:
     T find(T obj);
-    
+
     // Description: prints elements of the list in order
     // Pre:
     // Post:
     // Return:
     virtual void print() const;
-    
+
+    // Description: prints 3 highest elements of the list
+    // Pre:
+    // Post:
+    // Return:
+    virtual void printTop3() const;
+
     // Description: shows if the linked list is empty
     // Pre:
     // Post:
     // Return: true if the list is empty
     virtual bool isEmpty();
-    
+
     // Description: deletes all elements in the list
     // Pre:
     // Post: deletes all elements in the array and resets the start and end pointers
     // Return:
     virtual void clear();
-    
+
     // Description: shows name of the data structure
     // Pre:
     // Post:
     // Return: returns "Linked List"
     virtual string getStructName() { return "Linked List"; }
-    
+
     //Node Operations
-    
+
     // Description: returns node with specific element
     // Pre:
     // Post:
     // Return: node with inputdata
     LinkNode<T>* getNode(T inputData);
-    
+
     // Description: inserts node to end of list
     // Pre:
     // Post: inserts node to end of list, updates pointer of second last node
     // Return:
     void appendNode(T inputData);
-    
+
     // Description: inserts node to start of list
     // Pre:
     // Post: inserts node to start of list, updates start pointer
     // Return:
     void prependNode(T inputData);
-    
+
     // Description: inserts new node after finding a certain node
     // Pre:
     // Post: finds obj then points it to a new node with inputdata
     // Return:
     void insertNode(T obj, T inputData);
-    
+
     // Description: deletes an element from linked list
     // Pre:
     // Post: deletes node with inputdata
     // Return:
     bool deleteNode(T inputData);
-    
+
 };
 
 template <typename T>
@@ -131,13 +137,13 @@ T SinglyLinkedList<T>::find(T obj)
     {
         LinkNode<T>* nodePtr = nullptr;
         nodePtr = start;
-        
+
         while (nodePtr != nullptr)
         {
             searchOperations++;
             if (nodePtr->data == obj)
                 return nodePtr->data;
-            
+
             nodePtr = nodePtr->next;
         }
         searchOperations++;
@@ -231,12 +237,12 @@ void SinglyLinkedList<T>::appendNode(T inputData)
 {
     LinkNode<T>* newNode = nullptr; // Points to new node
     LinkNode<T>* nodePtr = nullptr; // Move through the list
-    
+
     //Make new node, populate with data and set next to nullptr
     newNode = new LinkNode<T>;
     newNode->data = inputData;
     newNode->next = nullptr;
-    
+
     if (isEmpty())
     {
         start = newNode;
@@ -245,12 +251,12 @@ void SinglyLinkedList<T>::appendNode(T inputData)
     else
     {
         nodePtr = start;      //start traversing from start node
-        
+
         while (nodePtr->next)
         {
             nodePtr = nodePtr->next;   //set nodePtr to the next node
         }
-        
+
         //insert newNode and end as next
         nodePtr->next = newNode;
         end = nodePtr->next;
@@ -290,10 +296,10 @@ bool SinglyLinkedList<T>::deleteNode(T inputData)
 {
     LinkNode<T>* nodePtr = nullptr;
     LinkNode<T>* previous = nullptr;
-    
+
     if (isEmpty())
         return false;
-    
+
     //If we are deleting first node
     if (start->data == inputData)
     {
@@ -310,16 +316,16 @@ bool SinglyLinkedList<T>::deleteNode(T inputData)
         {
             previous = nodePtr;
             nodePtr = nodePtr->next;
-            
+
             end = nodePtr;
         }
-        
+
         //If not the last node
         if (nodePtr)
         {
             previous->next = nodePtr->next;
             delete nodePtr;
-            return true; 
+            return true;
         }
         decrementCount();
     }
@@ -338,7 +344,7 @@ void SinglyLinkedList<T>::clear()
 {
     LinkNode<T>* nodePtr;
     LinkNode<T>* next;
-    
+
     nodePtr = start;
     while (nodePtr != nullptr)
     {
@@ -346,7 +352,7 @@ void SinglyLinkedList<T>::clear()
         delete nodePtr;
         nodePtr = next;
     }
-    
+
     start = nullptr;
     end = nullptr;
     count = 0;
@@ -357,13 +363,69 @@ void SinglyLinkedList<T>::print() const
 {
     LinkNode<T>* nodePtr;
     nodePtr = start;
-    
+
     while (nodePtr != nullptr)
     {
         T temp = nodePtr->data;
-        
+
         cout << temp << " ";
         nodePtr = nodePtr->next;
+    }
+    cout << endl;
+}
+
+template<typename T>
+void SinglyLinkedList<T>::printTop3() const
+{
+    LinkNode<T>* nodePtr;
+    nodePtr = start;
+    int first3 = 0;
+    const int arr_size = 3;
+    T top3arr[arr_size];
+
+    while (nodePtr != nullptr)
+    {
+        T temp = nodePtr->data;
+
+        if(first3 < arr_size)
+        {
+            top3arr[first3] = temp;
+            first3++;
+
+        }
+        else
+        {
+            //simple bubble sort since array size is just 3
+            for(int i = 0; i < arr_size; i++)
+            {
+                for (int i = 0; i < arr_size-1; i++)
+                {
+                     for (int j = 0; j < arr_size-i-1; j++)
+                     {
+                         if (top3arr[j] > top3arr[j+1])
+                        {
+                            T temp = top3arr[j];
+                            top3arr[j] = top3arr[j+1];
+                            top3arr[j+1] = temp;
+                        }
+                     }
+                }
+
+                if(top3arr[i] < temp)
+                {
+                    top3arr[i] = temp;
+                    break;
+                }
+
+            }
+        }
+
+        nodePtr = nodePtr->next;
+    }
+
+    for(int i = 0; i < 3; i++)
+    {
+        cout << top3arr[i];
     }
     cout << endl;
 }
