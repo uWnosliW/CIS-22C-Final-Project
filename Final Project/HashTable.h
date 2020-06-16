@@ -27,9 +27,28 @@ public:
     ~HashTable();
     
     //HashTable Operations
+    // Description: inserts a node into hashtable
+    // Pre: T inputData - data to insert
+    // Post: node gets inserted and certain pointers are modified, table gets resized if a critical load factor is reached
+    // Return:
     void insert(T inputData);
+    
+    // Description: finds an object in hashtable
+    // Pre: T inputData - data to find
+    // Post:
+    // Return: object if found
     T find(T inputData);
+    
+    // Description: removes an object from hashtable
+    // Pre: T inputData - data to remove
+    // Post: modifies linkedlist that object is found in
+    // Return: true if deletion was successful
     bool remove(T inputData);
+    
+    // Description: prints hashtable contents
+    // Pre:
+    // Post: 
+    // Return:
     void print();
     
     //Efficiency related

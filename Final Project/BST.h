@@ -83,7 +83,16 @@ public:
         return search(root, inputData);
     }
     
+    // Description: inserts a node into bst
+    // Pre: T inputData - data to insert
+    // Post: node gets inserted and certain pointers are modified
+    // Return:
     void insertNode(T inputData);
+    
+    // Description: deletes an element into bst
+    // Pre: T inputData - data to delete
+    // Post: node gets deleted and certain pointers are modified
+    // Return: true if deletion was successful
     bool deleteNode(T inputData);
     
     // Description: calls helper function

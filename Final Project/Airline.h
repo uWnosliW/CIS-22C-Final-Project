@@ -45,6 +45,11 @@ public:
     // Post:
     // Return: score of airline
     double calculateScore();
+    
+    // Description: returns unique key
+    // Pre:
+    // Post:
+    // Return: name of airline
     string getKey() {return name; }
     //Overloaded Operators
     bool operator> (const Airline& obj);
@@ -53,9 +58,18 @@ public:
     bool operator!= (const Airline& obj);
     Airline& operator= (const Airline& obj);
     //const Airline operator= (const Airline& obj);
+    
+    // Description: prints certain attributes of an airline
+    // Pre:
+    // Post: pushes airline into buffer
+    // Return:
     friend std::ostream& operator<<(std::ostream& out, Airline& obj);
     
     //Conversion Operator
+    // Description: converts name of airline to an int.
+    // Pre:
+    // Post:
+    // Return: int
     operator unsigned() const;
 
 };
