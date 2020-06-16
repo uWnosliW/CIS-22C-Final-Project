@@ -70,7 +70,7 @@ int main(int argc, const char * argv[]) {
         size++;
     }
     airInput.close();
-    cout<<"Type insert followed by an Airline object on the next line to update the database. Type delete, search, or print stats followed by the name of an Airline on the next line to check the database and display all airline information. Type display hash table, display in order, print indented tree, print efficiency to display Airlines in various formats. Type quit to exit the program."<<endl;
+    cout<<"Type insert followed by an Airline object on the next line to update the database. Type delete, search, or print stats followed by the name of an Airline on the next line to check the database and display all airline information. Type display hash table, display in order, print indented tree, print efficiency to display Airlines in various formats. Type recommend to recommend top 3 airlines. Type quit to exit the program."<<endl;
     string input;
     getline(cin,input);
     while(input != "quit")
