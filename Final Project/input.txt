@@ -147,7 +147,7 @@ Helitrans AS
 58.8
 493
 Helvetic Airways
-3 Lagos Rio_de_Janeiro
+3 Lagos Rio_de_Janeiro San_Francisco
 68.9
 285
 Hex'Air
@@ -187,7 +187,7 @@ Horizon Air
 68.9
 84
 Hunnu Air
-4 Johannesburg Saint_Petersburg Qingdao
+4 Johannesburg Saint_Petersburg Qingdao Frankfort
 47.9
 4831
 IndiGo

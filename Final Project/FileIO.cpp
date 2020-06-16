@@ -7,6 +7,7 @@ using namespace std;
 
 int main()
 {
+    
     string fileName = "input.txt";
     ifstream airInput(fileName);
 

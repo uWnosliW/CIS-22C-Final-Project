@@ -7,7 +7,14 @@ Airline::Airline(string nme, string* dest, int numDest, double onTime, int numAn
 {
     score = calculateScore();
 }
-
+Airline::Airline(const Airline& obj) : name(obj.name), score(obj.score), numDestinations(obj.numDestinations), onTimePercentage(obj.onTimePercentage),numAnnualComplaints(obj.numAnnualComplaints)
+{
+    destinations = new string[numDestinations];
+    for(int i=0;i<numDestinations;i++)
+    {
+        destinations[i] = obj.destinations[i];
+    }
+}
 void Airline::printStats()
 {
     cout << "Airline name: " << name << endl;
@@ -20,31 +27,16 @@ void Airline::printStats()
     cout << "Number of Annual Complaints: " << numAnnualComplaints << endl;
 }
 
-int Airline::calculateScore()
+double Airline::calculateScore()
 {
-    int score = 0;
+    double score = 1.0;
     
-    if (numDestinations < 5)
-        score+=5;
-    else if (numDestinations < 10)
-        score+=10;
-    else
-        score+=15;
-    
-    if (onTimePercentage < 0.8)
-        score+=5;
-    else if (onTimePercentage < 0.9)
-        score+=10;
-    else
-        score+=15;
-
-    if (numAnnualComplaints < 10)
-        score+=15;
-    else if (numAnnualComplaints < 15)
-        score+=10;
-    else
-        score+=5;
-    
+    for(int i=0;i<numDestinations;i++)
+    {
+        score*=1.1;
+    }
+    score*=onTimePercentage*onTimePercentage;
+    score/=numAnnualComplaints;
     return score;
 }
 
@@ -56,6 +48,26 @@ bool Airline::operator> (const Airline& obj)
 bool Airline::operator< (const Airline& obj)
 {
     return (score < obj.score);
+}
+
+bool Airline::operator!= (const Airline& obj)
+{
+    return (score != obj.score);
+}
+
+Airline& Airline::operator = (const Airline& obj)
+{
+    this->name = obj.name;
+    this->numAnnualComplaints = obj.numAnnualComplaints;
+    this->numDestinations = obj.numDestinations;
+    this->onTimePercentage = obj.onTimePercentage;
+    this->score = obj.score;
+    this->destinations = new string[this->numDestinations];
+    for(int i=0;i<this->numDestinations;i++)
+    {
+        this->destinations[i] = obj.destinations[i];
+    }
+    return *this;
 }
 
 bool Airline::operator== (const Airline& obj)

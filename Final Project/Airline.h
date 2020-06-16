@@ -11,7 +11,7 @@ class Airline
 {
 private:
     string name;
-    int score;
+    double score;
     string* destinations;
     int numDestinations;
     double onTimePercentage;
@@ -20,6 +20,7 @@ private:
 public:
     //Ctor
     Airline();
+    Airline(const Airline& obj);
     Airline(string nme, string* dest = nullptr, int numDest = 0, double onTime = 0.0, int numAnnComp = 0);
     
     //Dtor
@@ -27,12 +28,14 @@ public:
     
     //Member functions
     void printStats();
-    int calculateScore();
+    double calculateScore();
     
     //Overloaded Operators
     bool operator> (const Airline& obj);
     bool operator< (const Airline& obj);
     bool operator== (const Airline& obj);
+    bool operator!= (const Airline& obj);
+    Airline& operator= (const Airline& obj);
     //const Airline operator= (const Airline& obj);
     friend std::ostream& operator<<(std::ostream& out, Airline& obj);
     

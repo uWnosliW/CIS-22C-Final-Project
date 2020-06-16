@@ -4,6 +4,7 @@
 #include <iostream>
 #include "BSTNode.h"
 #include "Queue.h"
+#include "Airline.h"
 template<typename T>
 class BST
 {
@@ -115,6 +116,7 @@ template <typename T>
 BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData) const
 {
     T data = nodePtr->getData();
+    //std::cout<<"searching "<<data<<endl;
     if(data == inputData)
     {
         return nodePtr;
@@ -143,6 +145,8 @@ void BST<T>::insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode)
     {
         curr = (newNode -> getData() < curr -> getData())? curr -> getLeft(): curr->getRight();
     }
+    //Airline temp = newNode->getData(), temp2 = curr -> getData();
+    //cout<<"insert comp: "<<temp<< temp2<<endl;
     if(newNode -> getData() < curr -> getData())
     {
         curr -> setLeft(newNode);
@@ -169,7 +173,8 @@ void BST<T>::printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     if (nodePtr != nullptr)
     {
         printInOrder(nodePtr->getLeft(),out);
-        out << nodePtr->getData() << std::endl;
+        T t = nodePtr->getData();
+        out << t << std::endl;
         printInOrder(nodePtr->getRight(),out);
     }
 }
@@ -178,7 +183,8 @@ void BST<T>::printPreOrder(BSTNode<T>* nodePtr, std::ostream &out) const
 {
     if (nodePtr != nullptr)
     {
-        out << nodePtr->getData() << std::endl;
+        T t = nodePtr->getData();
+        out << t << std::endl;
         printPreOrder(nodePtr->getLeft(),out);
         printPreOrder(nodePtr->getRight(),out);
     }
@@ -190,7 +196,8 @@ void BST<T>::printPostOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     {
         printPostOrder(nodePtr->getLeft(),out);
         printPostOrder(nodePtr->getRight(),out);
-        out << nodePtr->getData() << std::endl;
+        T t = nodePtr->getData();
+        out << t << std::endl;
     }
 }
 template<typename T>
