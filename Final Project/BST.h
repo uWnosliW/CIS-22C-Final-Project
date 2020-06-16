@@ -58,7 +58,7 @@ private:
     // Pre:
     // Post:
     // Return:
-    void remove(T inData, BSTNode<T>*& nodePtr);
+    bool remove(T inData, BSTNode<T>*& nodePtr);
     
 public:
     //Ctor
@@ -84,7 +84,7 @@ public:
     }
     
     void insertNode(T inputData);
-    void deleteNode(T inputData);
+    bool deleteNode(T inputData);
     
     // Description: calls helper function
     // Pre:
@@ -279,7 +279,7 @@ void BST<T>::clear(BSTNode<T>* nodePtr)
 }
 
 template<typename T>
-void BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
+bool BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
 {
     //cout<<"Removing "<<nodePtr -> getData()<<" "<<nodePtr -> getLeft()<<" "<<nodePtr->getRight()<<endl;
     BSTNode<T>* prev = nullptr;
@@ -354,17 +354,17 @@ void BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
                 remove(tempData, nodePtr);
                 curr->setData(tempData);
             }
-            return;
+            return true;
              // Node found and removed
         }
     }
-    return;
+    return false;
 }
 
 template<typename T>
-void BST<T>::deleteNode(T inputData)
+bool BST<T>::deleteNode(T inputData)
 {
     count--;
-    remove(inputData, root);
+    return remove(inputData, root);
 }
 #endif /* BST_h */

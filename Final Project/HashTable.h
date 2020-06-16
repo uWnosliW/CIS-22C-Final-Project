@@ -29,7 +29,7 @@ public:
     //HashTable Operations
     void insert(T inputData);
     T find(T inputData);
-    void remove(T inputData);
+    bool remove(T inputData);
     void print();
     
     //Efficiency related
@@ -122,27 +122,25 @@ T HashTable<T,NumBuckets>::find(T inputData)
 }
 
 template<typename T, int NumBuckets>
-void HashTable<T,NumBuckets>::remove(T inputData)
+bool HashTable<T,NumBuckets>::remove(T inputData)
 {
     auto index = hash(inputData);
     
     if( array[index].isEmpty() )
     {
-        std::cerr << "Nothing to Remove" << std::endl;
-        return;
+        return false;
     }
     if (array[index].find(inputData) == 0)
     {
-        std::cerr << "Data not found" << std::endl;
-        return;
+        return false;
     }
     else if (array[index].find(inputData) != 0)
     {
-        array[index].deleteNode(inputData);
+        return array[index].deleteNode(inputData);
         numNodes--;
     }
     else
-        std::cerr << "Uncaught error." << std::endl;
+        return false;
 }
 
 template<typename T, int NumBuckets>

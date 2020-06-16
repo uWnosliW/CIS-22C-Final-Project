@@ -119,7 +119,7 @@ public:
     // Pre:
     // Post: deletes node with inputdata
     // Return:
-    void deleteNode(T inputData);
+    bool deleteNode(T inputData);
     
 };
 
@@ -288,13 +288,13 @@ void SinglyLinkedList<T>::insertNode(T obj, T inputData)
 }
 
 template <typename T>
-void SinglyLinkedList<T>::deleteNode(T inputData)
+bool SinglyLinkedList<T>::deleteNode(T inputData)
 {
     LinkNode<T>* nodePtr = nullptr;
     LinkNode<T>* previous = nullptr;
     
     if (isEmpty())
-        return;
+        return false;
     
     //If we are deleting first node
     if (start->data == inputData)
@@ -302,8 +302,8 @@ void SinglyLinkedList<T>::deleteNode(T inputData)
         nodePtr = start->next;
         delete start;
         start = nodePtr;
-        
         decrementCount();
+        return true;
     } else
     {
         nodePtr = start;
@@ -321,9 +321,11 @@ void SinglyLinkedList<T>::deleteNode(T inputData)
         {
             previous->next = nodePtr->next;
             delete nodePtr;
+            return true; 
         }
         decrementCount();
     }
+    return false;
 }
 
 template<typename T>
