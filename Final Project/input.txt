@@ -50,3 +50,151 @@ China Southern
 7 Shanghai Beijing Hebei London Berlin Munich Hamburg
 82.0
 85
+De Anza Air
+5 Math English Physics Engineering CIS
+37.0
+38
+Calafia Airlines
+8 City1 City5 City30 City94 City8 City10 City10 City28
+29.0
+48
+Calm Air ‏
+12 City1 City18 City5 City38 City3847 City30 City3890 City94 City8 City10 City10 City28
+99.0
+1893
+Camair-Co ‏
+4 Big_City Small_City Mid_City Capital_City
+38.0
+3823
+Cambodia Airways ‏
+7 Berlin Saigon Beijing Seattle London Boston San_Francisco
+84.5
+583
+Cambodia Angkor Air ‏
+3 Toronto Miami Orlando
+38.0
+4385
+Cambodia Bayon Airlines ‏
+6 Hangzhou Hong_Kong Kuala_Lumpur Wuhan Chengdu Chicago
+83.8
+48
+Canadian North ‏
+3 Toronto Shanghai Delhi
+59.0
+58
+Canaryfly
+5 Mexico_City Cairo Mumbia Manika Kolkata
+79.9
+5948
+Cape Air
+9 Tianjin Kinshasa Guangzhou Los_Angeles Moscow Shenzhen Lahore Bangalore Paris
+48.9
+58
+Carpatair
+2 Bogota Jakarta
+99.999
+32
+Cathay Dragon
+6 Chennai Lima Bangkok Seoul Nagoya Hyberabad
+84.3
+48
+Hahn Air Lines
+5 London Tehran Chicago Chengdu Nanjing
+60.8
+38
+Hahn Air Systems
+7 Wuhan Ho_Chi_Minh_City Luanda Ahmedabad Kuala_Lumpur Hong_Kong Dongguan
+98.0
+34
+Hainan Airlines
+3 Foshan Shenyang Riyadh
+87.0
+9630
+Hapagfly
+8 Baghdad Santiago Surat Madrid Suzhou Pune Harbin Houston
+88.4
+53
+Harbour Air Seaplanes
+4 Dallas Toronto Miami Belo_Horizonte
+87.0
+563
+Harbour Air Seaplanes
+4 Singapore Philadelphia Atlanta Fukuoka
+78.9
+865
+Harmony Airways
+3 Khartoum Barcelona Saint_Petersburg
+85.3
+485
+Hawaiian Airlines
+5 Qingdao Dalian Washington_DC Yangon Alexandria
+74.8
+564
+Hebei Airlines
+2 Jinan Guadalajara
+48.8
+5832
+Heli Securite Helicopter Airline
+3 Tokyo Delhi Shanghai
+95.0
+384
+Helijet
+9 Sao_Paulo Mexico_City Cairo Mumbai Beijing Dhaka Osaka New_York_City Karachi
+74.9
+48
+Helitrans AS
+5 Buenos_Aires Chongqing Istanbul Kolkata Manila
+58.8
+493
+Helvetic Airways
+3 Lagos Rio_de_Janeiro
+68.9
+285
+Hex'Air
+5 Tianjin Kinshasa Guangzhou Los_Angeles Moscow
+86.0
+54
+Hi Fly
+4 Shenzhen Lahore Bangalore Paris
+83
+58
+Himalaya Airlines
+6 Bangalore Paris Bogota Jakarta Chennai Lima
+43.8
+5938
+Hinterland Aviation
+8 Bangkok Seoul Nagoya Hyderabad London Tehran Chicago Chengdu
+68.6
+593
+HK Express
+4 Chengdu Nanjing Wuhan Ho_Chi_Minh_City
+86.9
+384
+Hokkaido Air System
+10 Luanda Ahmedabad Kuala_Lumpur Xi'an Hong_Kong Dongguan Hangzhou Foshan Shenyang Riyadh
+49.8
+538
+Hong Kong Airlines
+3 Baghdad Santiago Surat
+76.4
+35
+HOP
+7 Madrid Suzhou Pune Harbin Houston Dallas Toronto
+65.9
+36
+Horizon Air
+5 Miami Belo_Horizonte Singapore Philidelphia Atlanta
+68.9
+84
+Hunnu Air
+4 Johannesburg Saint_Petersburg Qingdao
+47.9
+4831
+IndiGo
+2 Big_City Tiny_City
+48.9
+96
+HW Air
+6 Lab1 Lab2 Lab3 Lab4 Lab5 Lab6
+19.2
+3243
