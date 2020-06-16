@@ -19,42 +19,42 @@ int main(int argc, const char * argv[]) {
         cerr << "Can't find " << fileName << endl;
         exit(-1);
     }
-    
+
     string nameTemp, destTemp, dummy;
     int numDestTemp = 0, numAnnualCompTemp = 0;
     double onTimePercentage = 0;
     string* destListTemp;
     int size = 1;
-    
+
     while(!airInput.eof())
     {
         try
         {
             getline(airInput, nameTemp);
-            
+
             if(airInput.eof())
                 break;
-            
+
             airInput >> numDestTemp;
             destListTemp = new string[numDestTemp];
-            
+
             int counter = 0;
-            
+
             while(counter < numDestTemp)
             {
                 airInput >> destTemp;
                 destListTemp[counter] = destTemp;
                 counter++;
             }
-            
+
             airInput >> onTimePercentage;
             airInput >> numAnnualCompTemp;
-            
+
             getline(airInput, dummy);
-            
+
             Airline temp(nameTemp, destListTemp, numDestTemp,
                          onTimePercentage, numAnnualCompTemp);
-            
+
             //cout<<temp<<endl;
             bst.insertNode(temp);
             //bst.printInOrder();
@@ -70,7 +70,7 @@ int main(int argc, const char * argv[]) {
         size++;
     }
     airInput.close();
-    cout<<"Type insert followed by an Airline object on the next line to update the database. Type delete, search, or print stats followed by the name of an Airline on the next line to check the database and display all airline information. Type display hash table, display in order, print indented tree, print efficiency to display Airlines in various formats. Type quit to exit the program."<<endl;
+    cout<<"Type insert followed by an Airline object on the next line to update the database. Type delete, search, or print stats followed by the name of an Airline on the next line to check the database and display all airline information. Type display hash table, display in order, print indented tree, print efficiency to display Airlines in various formats. Type recommend to recommend top 3 airlines. Type quit to exit the program."<<endl;
     string input;
     getline(cin,input);
     while(input != "quit")
@@ -84,7 +84,7 @@ int main(int argc, const char * argv[]) {
             cin >> numDestTemp;
             string* destListTemp = new string[numDestTemp];
             int counter = 0;
-            
+
             while(counter < numDestTemp)
             {
                 cin >> destTemp;
@@ -131,7 +131,7 @@ int main(int argc, const char * argv[]) {
             {
                 cout<<name<<" is not currently in any data structure."<<endl;
             }
-                
+
         }
         else if(input == "print stats")
         {
@@ -174,6 +174,11 @@ int main(int argc, const char * argv[]) {
             {
                 cout<<"No searches have been made yet."<<endl;
             }
+        }
+        else if(input == "recommend")
+        {
+            cout << "Here's the top 3 airlines in the data structure:" << endl;
+            linkedlist.printTop3();
         }
         else
         {
