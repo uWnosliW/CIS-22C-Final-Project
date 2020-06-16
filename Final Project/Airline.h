@@ -29,7 +29,7 @@ public:
     //Member functions
     void printStats();
     double calculateScore();
-    
+    string getKey() {return name; }
     //Overloaded Operators
     bool operator> (const Airline& obj);
     bool operator< (const Airline& obj);

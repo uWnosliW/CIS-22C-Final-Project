@@ -67,7 +67,6 @@ int main(int argc, const char * argv[]) {
             linkedlist.appendNode(temp);
             hashtable.insert(temp);
             airlines[size - 1] = temp;
-            cout<<size - 1 << " "<<airlines[size - 1];
             delete []destListTemp;
         }
         catch(...)
@@ -76,21 +75,7 @@ int main(int argc, const char * argv[]) {
         }
         size++;
     }
-    //bst.printInOrder();
-    /*cout<<"------------------"<<endl;
-    for(int i=0;i<size-1;i++)
-    {
-        //cout<<airlines[i];
-        auto t = linkedlist.find(airlines[i]);
-        cout<<t<<endl;
-    }*/
-    
-    cout<<"------------------"<<endl;
-    for(int i=0;i<size-1;i++)
-    {
-        auto t = hashtable.find(airlines[i]);
-        t.printStats();
-    }
+    bst.printIndentedTree();
     system("pause");
     return 0;
 }

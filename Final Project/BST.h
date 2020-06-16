@@ -44,7 +44,13 @@ private:
     // Post:
     // Return:
     void printPostOrder(BSTNode<T>* nodePtr, std::ostream &out) const;
-  
+    
+    // Description: prints BST as an indented tree sideways
+    // Pre:
+    // Post:
+    // Return:
+    void printIndentedTree(int level, BSTNode<T>* nodePtr, std::ostream &out = std::cout) const;
+    
     // Description: Prints BST preorder
     // Pre:
     // Post:
@@ -91,6 +97,11 @@ public:
     // Return:
     void printBreadthFirst(std::ostream &out = std::cout) const;
     
+    // Description: prints BST as an indented tree sideways
+    // Pre:
+    // Post:
+    // Return:
+    void printIndentedTree(int level = 0, std::ostream &out = std::cout) const {printIndentedTree(0, root,out);}
     
     // Description: shows how many nodes are in the BST
     // Pre:
@@ -176,6 +187,23 @@ void BST<T>::printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const
         T t = nodePtr->getData();
         out << t << std::endl;
         printInOrder(nodePtr->getRight(),out);
+    }
+}
+template<typename T>
+void BST<T>::printIndentedTree(int level, BSTNode<T>* nodePtr, std::ostream &out) const
+{
+    if (nodePtr != nullptr)
+    {
+        printIndentedTree(level+1, nodePtr->getRight(),out);
+        string space = "                  ";
+        string spacing = "";
+        for(int i=0;i<level;i++)
+        {
+            spacing+= space;
+        }
+        std::string t = nodePtr->getData().getKey();
+        out << spacing<< t << std::endl;
+        printIndentedTree(level+1, nodePtr->getLeft(),out);
     }
 }
 template<typename T>
