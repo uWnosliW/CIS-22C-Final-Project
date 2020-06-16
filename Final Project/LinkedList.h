@@ -59,7 +59,7 @@ public:
     // Pre:
     // Post: adds 1 to count
     // Return:
-    bool find(T obj);
+    T find(T obj);
     
     // Description: prints elements of the list in order
     // Pre:
@@ -120,10 +120,10 @@ public:
 };
 
 template <typename T>
-bool SinglyLinkedList<T>::find(T obj)
+T SinglyLinkedList<T>::find(T obj)
 {
     if (isEmpty())
-        return false;
+        return T();
     else
     {
         LinkNode<T>* nodePtr = nullptr;
@@ -132,11 +132,11 @@ bool SinglyLinkedList<T>::find(T obj)
         while (nodePtr != nullptr)
         {
             if (nodePtr->data == obj)
-                return true;
+                return nodePtr->data;
             
             nodePtr = nodePtr->next;
         }
-        return false;
+        return T();
     }
 }
 template<typename T>

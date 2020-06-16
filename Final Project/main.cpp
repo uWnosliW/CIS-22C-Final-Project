@@ -14,11 +14,12 @@
 #include "LinkedList.h"
 using namespace std;
 int main(int argc, const char * argv[]) {
-    string fileName = "/Users/Wilson/Documents/De Anza/Final Project/Final Project/smallInput.txt";
+    string fileName = "/Users/Wilson/Documents/Final Project/Final Project/smallInput.txt";
     ifstream airInput(fileName);
     SinglyLinkedList<Airline> linkedlist;
     HashTable<Airline, 50> hashtable;
     BST<Airline> bst;
+    Airline airlines[50];
     if (!airInput)
     {
         cerr << "Can't find " << fileName << endl;
@@ -29,7 +30,7 @@ int main(int argc, const char * argv[]) {
     int numDestTemp = 0, numAnnualCompTemp = 0;
     double onTimePercentage = 0;
     string* destListTemp;
-    int counter = 1;
+    int size = 1;
     
     while(!airInput.eof())
     {
@@ -65,21 +66,30 @@ int main(int argc, const char * argv[]) {
             //bst.printInOrder();
             linkedlist.appendNode(temp);
             hashtable.insert(temp);
+            airlines[size - 1] = temp;
+            cout<<size - 1 << " "<<airlines[size - 1];
             delete []destListTemp;
         }
         catch(...)
         {
-            cout << "Something went wrong reading airline data #" << counter << endl;
+            cout << "Something went wrong reading airline data #" << size << endl;
         }
-        counter++;
+        size++;
     }
-    bst.printInOrder();
-    cout<<"------------------"<<endl;
-    while(!linkedlist.isEmpty())
+    //bst.printInOrder();
+    /*cout<<"------------------"<<endl;
+    for(int i=0;i<size-1;i++)
     {
-        Airline temp = bst.search(linkedlist.getStart()->data)->getData();
-        cout<<temp<<endl;
-        linkedlist.deleteNode(linkedlist.getStart()->data);
+        //cout<<airlines[i];
+        auto t = linkedlist.find(airlines[i]);
+        cout<<t<<endl;
+    }*/
+    
+    cout<<"------------------"<<endl;
+    for(int i=0;i<size-1;i++)
+    {
+        auto t = hashtable.find(airlines[i]);
+        t.printStats();
     }
     system("pause");
     return 0;

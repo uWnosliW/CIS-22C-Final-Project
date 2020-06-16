@@ -28,7 +28,7 @@ public:
     
     //HashTable Operations
     void insert(T inputData);
-    bool find(T inputData);
+    T find(T inputData);
     void remove(T inputData);
     void print();
     
@@ -111,14 +111,14 @@ void HashTable<T,NumBuckets>::resize()
 
 
 template<typename T, int NumBuckets>
-bool HashTable<T,NumBuckets>::find(T inputData)
+T HashTable<T,NumBuckets>::find(T inputData)
 {
     auto index = hash(inputData);
     
     if( array[index].isEmpty())
-       return false;
+       return T();
     else
-        return ( array[index].find(inputData) != 0 );
+        return array[index].find(inputData);
 }
 
 template<typename T, int NumBuckets>
