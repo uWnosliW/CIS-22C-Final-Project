@@ -52,16 +52,17 @@ int main(int argc, const char * argv[]) {
 
             getline(airInput, dummy);
 
-            Airline temp(nameTemp, destListTemp, numDestTemp,
+            Airline* temp = new Airline(nameTemp, destListTemp, numDestTemp,
                          onTimePercentage, numAnnualCompTemp);
 
             //cout<<temp<<endl;
-            bst.insertNode(temp);
+            bst.insertNode(*temp);
             //bst.printInOrder();
-            linkedlist.appendNode(temp);
-            hashtable.insert(temp);
-            airlines[size - 1] = temp;
+            linkedlist.appendNode(*temp);
+            hashtable.insert(*temp);
+            airlines[size - 1] = *temp;
             delete []destListTemp;
+            delete temp;
         }
         catch(...)
         {

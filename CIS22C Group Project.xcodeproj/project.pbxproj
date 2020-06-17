@@ -36,6 +36,7 @@
 		C81D22A52498CD98007D9B26 /* smallInput.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = smallInput.txt; path = "Final Project/smallInput.txt"; sourceTree = SOURCE_ROOT; };
 		C81D22A62498CD98007D9B26 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Queue.h; path = "Final Project/Queue.h"; sourceTree = SOURCE_ROOT; };
 		C81D22A82498CD98007D9B26 /* HashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HashTable.h; path = "Final Project/HashTable.h"; sourceTree = SOURCE_ROOT; };
+		C81D22AD24997F64007D9B26 /* input ver2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "input ver2.txt"; path = "Final Project/input ver2.txt"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +69,7 @@
 		64FEE529248C987F00A25B2F /* CIS22C Group Project */ = {
 			isa = PBXGroup;
 			children = (
+				C81D22AD24997F64007D9B26 /* input ver2.txt */,
 				C81D22A12498CD98007D9B26 /* Airline.cpp */,
 				C81D229C2498CD98007D9B26 /* Airline.h */,
 				C81D229E2498CD98007D9B26 /* BST.h */,
