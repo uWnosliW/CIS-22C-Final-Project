@@ -1,132 +1,82 @@
-#include "Airline.h"
+#ifndef Airline_h
+#define Airline_h
 
-Airline::Airline() : name(""), score(-1), destinations(nullptr), numDestinations(0), onTimePercentage(0.0),numAnnualComplaints(0)
+#include <iostream>
+#include <string>
+using std::string;
+using std::cout;
+using std::endl;
+
+class Airline
 {
-    //std::cout<<"ctor called: "<< this << std::endl;
+private:
+    string name;
+    double score;
+    string* destinations;
+    int numDestinations;
+    double onTimePercentage;
+    int numAnnualComplaints;
     
-}
-
-Airline::Airline(string nme, string* dest, int numDest, double onTime, int numAnnComp) : name(nme),destinations(dest) ,numDestinations(numDest), onTimePercentage(onTime), numAnnualComplaints(numAnnComp)
-{
-    //std::cout<<"ctor called: "<< this << std::endl;
-    score = calculateScore();
-}
-Airline::Airline(const Airline& obj) : name(obj.name), score(obj.score), numDestinations(obj.numDestinations), onTimePercentage(obj.onTimePercentage),numAnnualComplaints(obj.numAnnualComplaints)
-{
-    //std::cout<<"ctor called: "<< this << std::endl;
-
-    destinations = new string[numDestinations];
-    for(int i=0;i<numDestinations;i++)
-    {
-        destinations[i] = obj.destinations[i];
-    }
-}
-void Airline::printStats(std::ostream& out)
-{
-    out << "Airline name: " << name << endl;
-    out << "Score: " << score << endl;
-    out << "Destinations: ";
-    for (auto i = 0; i < numDestinations; i++)
-        out << destinations[i] << " ";
-    out << endl;
-    out << "On Time Percentage: " << onTimePercentage*100.0 << "%" << endl;
-    out << "Number of Annual Complaints: " << numAnnualComplaints << endl;
-}
-void Airline::printObject(std::ostream& out)
-{
-    out << name << endl;
-    out << numDestinations<<" ";
-    for (auto i = 0; i < numDestinations; i++)
-        out << destinations[i] << " ";
-    out << endl;
-    out << onTimePercentage << endl;
-    out << numAnnualComplaints << endl;
-}
-
-double Airline::calculateScore()
-{
-    double score = 1.0;
+public:
+    //Ctor
+    Airline();
+    Airline(const Airline& obj);
+    Airline(string nme, string* dest = nullptr, int numDest = 0, double onTime = 0.0, int numAnnComp = 0);
     
-    for(int i=0;i<numDestinations;i++)
+    //Dtor
+    ~Airline()
     {
-        score*=1.1;
-    }
-    score*=onTimePercentage*onTimePercentage;
-    score/=numAnnualComplaints;
-    return score;
-}
-
-bool Airline::operator> (const Airline& obj)
-{
-    return (score > obj.score);
-}
-
-bool Airline::operator< (const Airline& obj)
-{
-    return (score < obj.score);
-}
-
-bool Airline::operator!= (const Airline& obj)
-{
-    return (score != obj.score);
-}
-
-Airline& Airline::operator = (const Airline& obj)
-{
-    this->name = obj.name;
-    this->numAnnualComplaints = obj.numAnnualComplaints;
-    this->numDestinations = obj.numDestinations;
-    this->onTimePercentage = obj.onTimePercentage;
-    this->score = obj.score;
-    this->destinations = new string[this->numDestinations];
-    for(int i=0;i<this->numDestinations;i++)
-    {
-        this->destinations[i] = obj.destinations[i];
-    }
-    return *this;
-}
-
-bool Airline::operator== (const Airline& obj)
-{
-    return (name == obj.name);
-}
-
-//const Airline Airline::operator=(const Airline& obj)
-//{
-//    name = obj.name;
-//    score = obj.score;
-//    numDestinations = obj.numDestinations;
-//    for (auto i = 0; i < numDestinations; i++)
-//        destinations[i] = obj.destinations[i];
-//    onTimePercentage = obj.onTimePercentage;
-//    numAnnualComplaints = obj.numAnnualComplaints;
-//
-//    return *this;
-//}
-
-Airline::operator unsigned() const
-{
-    static unsigned primes[26] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101};
-    unsigned product = 1;
-    
-    for (auto i = 0; i < name.length(); i++)
-    {
-        product *= primes[tolower(name[i]) - 'a'];
+        //std::cout<<"dtor called: "<< this << std::endl;
+        delete [] destinations;
+        destinations=nullptr;
     }
     
-    return product;
-}
-
-std::ostream& operator<<(std::ostream& out, Airline& obj)
-{
-    out << "Airline name: " << obj.name << std::endl;
-    out << "Score: " << obj.score << std::endl;
-//    out << "Destinations: ";
-//    for (auto i = 0; i < obj.numDestinations; i++)
-//        out << obj.destinations[i] << " ";
-//    out << std::endl;
-//    out << "On Time Percentage: " << obj.onTimePercentage*100.0 << "%" << std::endl;
-//    out << "Number of Annual Complaints: " << obj.numAnnualComplaints << std::endl;
+    //Member functions
     
-    return out;
-}
+    // Description: prints out all important airline information
+    // Pre: std::ostream& out - output stream
+    // Post: pushes everything into ostream buffer
+    // Return:
+    void printStats(std::ostream& out = std::cout);
+    
+    // Description: prints out all important airline information
+    // Pre: std::ostream& out - output stream
+    // Post: pushes everything into ostream buffer
+    // Return:
+    void printObject(std::ostream& out = std::cout);
+    
+    // Description: calculates airline score
+    // Pre:
+    // Post:
+    // Return: score of airline
+    double calculateScore();
+    
+    // Description: returns unique key
+    // Pre:
+    // Post:
+    // Return: name of airline
+    string getKey() {return name; }
+    //Overloaded Operators
+    bool operator> (const Airline& obj);
+    bool operator< (const Airline& obj);
+    bool operator== (const Airline& obj);
+    bool operator!= (const Airline& obj);
+    Airline& operator= (const Airline& obj);
+    //const Airline operator= (const Airline& obj);
+    
+    // Description: prints certain attributes of an airline
+    // Pre:
+    // Post: pushes airline into buffer
+    // Return:
+    friend std::ostream& operator<<(std::ostream& out, Airline& obj);
+    
+    //Conversion Operator
+    // Description: converts name of airline to an int.
+    // Pre:
+    // Post:
+    // Return: int
+    operator unsigned() const;
+
+};
+
+#endif /* Airline_h */
