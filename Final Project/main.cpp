@@ -200,7 +200,7 @@ int main(int argc, const char * argv[]) {
             bst.search(temp);
             if(!(temp == nullptr))
             {
-                cout<<temp<<endl;
+                cout<<*temp<<endl;
             }
             else
             {
@@ -270,6 +270,8 @@ int main(int argc, const char * argv[]) {
     }
     system("pause");
     return 0;
+}
+
 }
 
 
