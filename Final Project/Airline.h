@@ -26,7 +26,7 @@ public:
     //Dtor
     ~Airline()
     {
-        std::cout<<"dtor called: "<< this << std::endl;
+        //std::cout<<"dtor called: "<< this << std::endl;
         delete [] destinations;
         destinations=nullptr;
     }
