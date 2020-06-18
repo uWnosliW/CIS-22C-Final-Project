@@ -24,7 +24,12 @@ public:
     Airline(string nme, string* dest = nullptr, int numDest = 0, double onTime = 0.0, int numAnnComp = 0);
     
     //Dtor
-    ~Airline() { std::cout<<"dtor called: "<< this << std::endl;}
+    ~Airline()
+    {
+        std::cout<<"dtor called: "<< this << std::endl;
+        delete [] destinations;
+        destinations=nullptr;
+    }
     
     //Member functions
     
