@@ -1,5 +1,3 @@
-//Wilson ueues as derived classes of Linked List and Yi-Wei
-
 #ifndef LinkedList_h
 #define LinkedList_h
 
@@ -132,7 +130,7 @@ T SinglyLinkedList<T>::find(T obj)
 {
     searchQueries++;
     if (isEmpty())
-        return T();
+        return nullptr;
     else
     {
         LinkNode<T>* nodePtr = nullptr;
@@ -141,13 +139,13 @@ T SinglyLinkedList<T>::find(T obj)
         while (nodePtr != nullptr)
         {
             searchOperations++;
-            if (nodePtr->data == obj)
+            if (*(nodePtr->data) == *obj)
                 return nodePtr->data;
 
             nodePtr = nodePtr->next;
         }
         searchOperations++;
-        return T();
+        return nullptr;
     }
 }
 template<typename T>
@@ -170,7 +168,7 @@ void SinglyLinkedList<T>::insertAscending(T inputData)
     {
         nodePtr = start;
 
-        while (nodePtr != nullptr && nodePtr->data < inputData)
+        while (nodePtr != nullptr && *(nodePtr->data) < *inputData)
         {
             previousNode = nodePtr;
             nodePtr = nodePtr->next;
@@ -205,7 +203,7 @@ LinkNode<T>* SinglyLinkedList<T>::getNode(T obj)
         LinkNode<T>* nodePtr = start;
         while (nodePtr != nullptr)
         {
-            if (nodePtr->data == obj)
+            if (*(nodePtr->data) == *obj)
                 return nodePtr;
             nodePtr = nodePtr->next;
         }
@@ -275,7 +273,7 @@ void SinglyLinkedList<T>::insertNode(T obj, T inputData)
     else
     {
         LinkNode<T>* currNode = start; //Get to correct index
-        while(currNode->data!=obj)
+        while(!(*(currNode->data)==*obj))
         {
             insertionOperations++;
             if (currNode->next == nullptr)
@@ -296,12 +294,12 @@ bool SinglyLinkedList<T>::deleteNode(T inputData)
 {
     LinkNode<T>* nodePtr = nullptr;
     LinkNode<T>* previous = nullptr;
-
+    
     if (isEmpty())
         return false;
 
     //If we are deleting first node
-    if (start->data == inputData)
+    if (*(start->data) == *inputData)
     {
         nodePtr = start->next;
         delete start;
@@ -312,7 +310,7 @@ bool SinglyLinkedList<T>::deleteNode(T inputData)
     {
         nodePtr = start;
         //Traverse through list
-        while (nodePtr != nullptr && nodePtr->data != inputData)
+        while (nodePtr != nullptr && !(*(nodePtr->data) == *inputData))
         {
             previous = nodePtr;
             nodePtr = nodePtr->next;
@@ -349,6 +347,7 @@ void SinglyLinkedList<T>::clear()
     while (nodePtr != nullptr)
     {
         next = nodePtr->next;
+        delete nodePtr->data;
         delete nodePtr;
         nodePtr = next;
     }
@@ -368,7 +367,7 @@ void SinglyLinkedList<T>::print() const
     {
         T temp = nodePtr->data;
 
-        cout << temp << " ";
+        cout << *temp << " ";
         nodePtr = nodePtr->next;
     }
     cout << endl;
@@ -425,7 +424,7 @@ void SinglyLinkedList<T>::printTop3() const
 
     for(int i = 0; i < 3; i++)
     {
-        cout << top3arr[i];
+        cout << *(top3arr[i]);
     }
     cout << endl;
 }

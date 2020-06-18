@@ -244,7 +244,7 @@ void BST<T>::printIndentedTree(int level, int parentLevel, bool left, BSTNode<T>
                 spacing+=space;
             }
         }
-        std::string t = nodePtr->getData().getKey();
+        std::string t = nodePtr->getData()->getKey();
         out << spacing<< t << std::endl;
         printIndentedTree(level+1, level, true, nodePtr->getLeft(),out);
     }

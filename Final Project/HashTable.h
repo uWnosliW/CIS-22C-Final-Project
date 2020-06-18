@@ -1,4 +1,3 @@
-//Keith
 #ifndef HashTable_h
 #define HashTable_h
 
@@ -48,7 +47,7 @@ public:
     
     // Description: prints hashtable contents
     // Pre:
-    // Post: 
+    // Post:
     // Return:
     void print();
     
@@ -78,7 +77,7 @@ void HashTable<T, NumBuckets>::insert(T inputData)
     {
         resize();
         //std::cout<<"resized to: " << numBuckets << std::endl;
-        auto index = hash(inputData);
+        auto index = hash(*inputData);
         
         if (array[index].isEmpty())
         {
@@ -91,7 +90,7 @@ void HashTable<T, NumBuckets>::insert(T inputData)
     } // Resize needed
     else
     {
-        auto index = hash(inputData);
+        auto index = hash(*inputData);
 
         if (array[index].isEmpty())
         {
@@ -119,7 +118,7 @@ void HashTable<T,NumBuckets>::resize()
         
         while (nodePtr != nullptr)
         {
-            auto index = hash(nodePtr->data);
+            auto index = hash(*(nodePtr->data));
             temp[index].insertAscending(nodePtr->data);
             
             nodePtr = nodePtr->next;
@@ -133,10 +132,10 @@ void HashTable<T,NumBuckets>::resize()
 template<typename T, int NumBuckets>
 T HashTable<T,NumBuckets>::find(T inputData)
 {
-    auto index = hash(inputData);
+    auto index = hash(*inputData);
     
     if( array[index].isEmpty())
-       return T();
+       return nullptr;
     else
         return array[index].find(inputData);
 }
@@ -144,7 +143,7 @@ T HashTable<T,NumBuckets>::find(T inputData)
 template<typename T, int NumBuckets>
 bool HashTable<T,NumBuckets>::remove(T inputData)
 {
-    auto index = hash(inputData);
+    auto index = hash(*inputData);
     
     if( array[index].isEmpty() )
     {

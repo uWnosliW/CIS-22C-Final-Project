@@ -14,7 +14,7 @@ private:
 public:
     //Ctor
     BSTNode() : left(nullptr), right(nullptr){ }
-    BSTNode(T inputData) : data(new Airline(inputData)), left(nullptr), right(nullptr) { }
+    BSTNode(T inputData) : data(new T(inputData)), left(nullptr), right(nullptr) { }
     
     //Dtor
     ~BSTNode() { delete data; }
