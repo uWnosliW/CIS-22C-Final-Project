@@ -1,4 +1,3 @@
-//Keith and Wilson
 #ifndef BST_h
 #define BST_h
 
@@ -152,12 +151,12 @@ BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData)
 {
     searchOperations++;
     T data = nodePtr->getData();
-    //std::cout<<"searching "<<data<<endl;
-    if(data == inputData)
+    
+    if(*data == *inputData)
     {
         return nodePtr;
     }
-    if(data > inputData)
+    if(*data > *inputData)
     {
         return nodePtr->getLeft() != nullptr ? search(nodePtr->getLeft(),inputData):nullptr;
     }
@@ -177,17 +176,20 @@ void BST<T>::insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode)
         root = newNode;
         return;
     }
-    while((newNode -> getData() < curr -> getData() && curr -> getLeft() != nullptr) ||
-          (newNode -> getData() > curr -> getData() && curr -> getRight() != nullptr))
+    while((*(newNode -> getData()) < *(curr -> getData()) && curr -> getLeft() != nullptr) ||
+          (*(newNode -> getData()) > *(curr -> getData()) && curr -> getRight() != nullptr))
     {
+        //std::cout << "newnode getdata: " << *(newNode->getData()) << "currnode getdata: " << *(curr->getData()) << std::endl;
+        
         insertionOperations++;
-        curr = (newNode -> getData() < curr -> getData())? curr -> getLeft(): curr->getRight();
+        curr = (*(newNode -> getData()) < *(curr -> getData()))? curr -> getLeft(): curr->getRight();
     }
     //Airline temp = newNode->getData(), temp2 = curr -> getData();
     //cout<<"insert comp: "<<temp<< temp2<<endl;
-    if(newNode -> getData() < curr -> getData())
+    if(*(newNode -> getData()) < *(curr -> getData()))
     {
         curr -> setLeft(newNode);
+        //std::cout << "curr" << curr << std::endl;
     }
     else
     {
@@ -212,7 +214,7 @@ void BST<T>::printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     {
         printInOrder(nodePtr->getLeft(),out);
         T t = nodePtr->getData();
-        out << t << std::endl;
+        out << *t << std::endl;
         printInOrder(nodePtr->getRight(),out);
     }
 }
@@ -244,7 +246,7 @@ void BST<T>::printIndentedTree(int level, int parentLevel, bool left, BSTNode<T>
                 spacing+=space;
             }
         }
-        std::string t = nodePtr->getData().getKey();
+        std::string t = nodePtr->getData()->getKey();
         out << spacing<< t << std::endl;
         printIndentedTree(level+1, level, true, nodePtr->getLeft(),out);
     }
@@ -255,7 +257,7 @@ void BST<T>::printPreOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     if (nodePtr != nullptr)
     {
         T t = nodePtr->getData();
-        out << t << std::endl;
+        out << *t << std::endl;
         printPreOrder(nodePtr->getLeft(),out);
         printPreOrder(nodePtr->getRight(),out);
     }
@@ -268,7 +270,7 @@ void BST<T>::printPostOrder(BSTNode<T>* nodePtr, std::ostream &out) const
         printPostOrder(nodePtr->getLeft(),out);
         printPostOrder(nodePtr->getRight(),out);
         T t = nodePtr->getData();
-        out << t << std::endl;
+        out << *t << std::endl;
     }
 }
 template<typename T>
@@ -280,7 +282,7 @@ void BST<T>::printBreadthFirst(std::ostream &out) const
     while(!next.isEmpty())
     {
         curr = next.peekFront();
-        out<<curr->getData()<<std::endl;
+        out<<*(curr->getData())<<std::endl;
         next.dequeue();
         if(curr->getLeft())
         {
@@ -308,18 +310,18 @@ void BST<T>::clear(BSTNode<T>* nodePtr)
 template<typename T>
 bool BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
 {
-    //cout<<"Removing "<<nodePtr -> getData()<<" "<<nodePtr -> getLeft()<<" "<<nodePtr->getRight()<<endl;
+    cout << "remove data: " << *inData << endl;
     BSTNode<T>* prev = nullptr;
     BSTNode<T>* curr = nodePtr;
     while(curr != nullptr)
     {
         //cout<<curr -> getData()<<curr -> getLeft()<<" "<<curr -> getRight()<<" "<<prev<<endl;
-        if(inData > curr->getData())
+        if(*inData > *(curr->getData()))
         {
             prev = curr;
             curr = curr->getRight();
         }
-        else if(inData < curr->getData())
+        else if(*inData < *(curr->getData()))
         {
             prev = curr;
             curr = curr->getLeft();
@@ -377,7 +379,7 @@ bool BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
                 {
                     next = next -> getLeft();
                 }
-                T tempData = next -> getData();
+                T tempData = (next -> getData());
                 remove(tempData, nodePtr);
                 curr->setData(tempData);
             }
