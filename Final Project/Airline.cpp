@@ -1,15 +1,20 @@
-//Keith
 #include "Airline.h"
 
 Airline::Airline() : name(""), score(-1), destinations(nullptr), numDestinations(0), onTimePercentage(0.0),numAnnualComplaints(0)
-{ }
+{
+    std::cout<<"ctor called: "<< this << std::endl;
+    
+}
 
 Airline::Airline(string nme, string* dest, int numDest, double onTime, int numAnnComp) : name(nme),destinations(dest) ,numDestinations(numDest), onTimePercentage(onTime), numAnnualComplaints(numAnnComp)
 {
+    std::cout<<"ctor called: "<< this << std::endl;
     score = calculateScore();
 }
 Airline::Airline(const Airline& obj) : name(obj.name), score(obj.score), numDestinations(obj.numDestinations), onTimePercentage(obj.onTimePercentage),numAnnualComplaints(obj.numAnnualComplaints)
 {
+    std::cout<<"ctor called: "<< this << std::endl;
+
     destinations = new string[numDestinations];
     for(int i=0;i<numDestinations;i++)
     {
@@ -95,7 +100,7 @@ bool Airline::operator== (const Airline& obj)
 //        destinations[i] = obj.destinations[i];
 //    onTimePercentage = obj.onTimePercentage;
 //    numAnnualComplaints = obj.numAnnualComplaints;
-//    
+//
 //    return *this;
 //}
 
