@@ -347,7 +347,7 @@ void SinglyLinkedList<T>::clear()
     while (nodePtr != nullptr)
     {
         next = nodePtr->next;
-        delete nodePtr->data;
+        //delete nodePtr->data;
         delete nodePtr;
         nodePtr = next;
     }
