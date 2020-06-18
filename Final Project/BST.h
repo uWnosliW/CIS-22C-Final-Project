@@ -1,4 +1,3 @@
-//Keith and Wilson
 #ifndef BST_h
 #define BST_h
 
@@ -153,11 +152,11 @@ BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData)
     searchOperations++;
     T data = nodePtr->getData();
     //std::cout<<"searching "<<data<<endl;
-    if(data == inputData)
+    if(*data == *inputData)
     {
         return nodePtr;
     }
-    if(data > inputData)
+    if(*data > *inputData)
     {
         return nodePtr->getLeft() != nullptr ? search(nodePtr->getLeft(),inputData):nullptr;
     }
@@ -177,15 +176,15 @@ void BST<T>::insert(BSTNode<T>*& nodePtr, BSTNode<T>*& newNode)
         root = newNode;
         return;
     }
-    while((newNode -> getData() < curr -> getData() && curr -> getLeft() != nullptr) ||
-          (newNode -> getData() > curr -> getData() && curr -> getRight() != nullptr))
+    while((*(newNode -> getData()) < *(curr -> getData()) && curr -> getLeft() != nullptr) ||
+          (*(newNode -> getData()) > *(curr -> getData()) && curr -> getRight() != nullptr))
     {
         insertionOperations++;
-        curr = (newNode -> getData() < curr -> getData())? curr -> getLeft(): curr->getRight();
+        curr = (*(newNode -> getData()) < *(curr -> getData()))? curr -> getLeft(): curr->getRight();
     }
     //Airline temp = newNode->getData(), temp2 = curr -> getData();
     //cout<<"insert comp: "<<temp<< temp2<<endl;
-    if(newNode -> getData() < curr -> getData())
+    if(*(newNode -> getData()) < *(curr -> getData()))
     {
         curr -> setLeft(newNode);
     }
@@ -212,7 +211,7 @@ void BST<T>::printInOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     {
         printInOrder(nodePtr->getLeft(),out);
         T t = nodePtr->getData();
-        out << t << std::endl;
+        out << *t << std::endl;
         printInOrder(nodePtr->getRight(),out);
     }
 }
@@ -255,7 +254,7 @@ void BST<T>::printPreOrder(BSTNode<T>* nodePtr, std::ostream &out) const
     if (nodePtr != nullptr)
     {
         T t = nodePtr->getData();
-        out << t << std::endl;
+        out << *t << std::endl;
         printPreOrder(nodePtr->getLeft(),out);
         printPreOrder(nodePtr->getRight(),out);
     }
@@ -268,7 +267,7 @@ void BST<T>::printPostOrder(BSTNode<T>* nodePtr, std::ostream &out) const
         printPostOrder(nodePtr->getLeft(),out);
         printPostOrder(nodePtr->getRight(),out);
         T t = nodePtr->getData();
-        out << t << std::endl;
+        out << *t << std::endl;
     }
 }
 template<typename T>
@@ -280,7 +279,7 @@ void BST<T>::printBreadthFirst(std::ostream &out) const
     while(!next.isEmpty())
     {
         curr = next.peekFront();
-        out<<curr->getData()<<std::endl;
+        out<<*(curr->getData())<<std::endl;
         next.dequeue();
         if(curr->getLeft())
         {
@@ -314,12 +313,12 @@ bool BST<T>::remove(T inData, BSTNode<T>*& nodePtr)
     while(curr != nullptr)
     {
         //cout<<curr -> getData()<<curr -> getLeft()<<" "<<curr -> getRight()<<" "<<prev<<endl;
-        if(inData > curr->getData())
+        if(*inData > *(curr->getData()))
         {
             prev = curr;
             curr = curr->getRight();
         }
-        else if(inData < curr->getData())
+        else if(*inData < *(curr->getData()))
         {
             prev = curr;
             curr = curr->getLeft();
