@@ -79,10 +79,10 @@ int main(int argc, const char * argv[]) {
     cout<<"Please enter the absolute file path of the input file:"<<endl;
     getline(cin,fileName);
     ifstream airInput(fileName);
-    SinglyLinkedList<Airline> linkedlist;
-    HashTable<Airline, 20> hashtable;
-    BST<Airline> bst;
-    //Airline airlines[50];
+    SinglyLinkedList<Airline*> linkedlist;
+    HashTable<Airline*, 20> hashtable;
+    BST<Airline*> bst;
+
     if (!airInput)
     {
         cerr << "Can't find " << fileName << endl;
@@ -121,17 +121,14 @@ int main(int argc, const char * argv[]) {
 
             getline(airInput, dummy);
 
-            Airline* temp = new Airline(nameTemp, destListTemp, numDestTemp,
-                         onTimePercentage, numAnnualCompTemp);
+            Airline* temp = new Airline(nameTemp,destListTemp,numDestTemp,onTimePercentage,numAnnualCompTemp);
 
             //cout<<temp<<endl;
-            bst.insertNode(*temp);
+            bst.insertNode(temp);
             //bst.printInOrder();
-            linkedlist.appendNode(*temp);
-            hashtable.insert(*temp);
-            //airlines[size - 1] = *temp;
-            delete []destListTemp;
-            delete temp;
+            linkedlist.appendNode(temp);
+            hashtable.insert(temp);
+            delete [] destListTemp;
         }
         catch(...)
         {
@@ -139,6 +136,17 @@ int main(int argc, const char * argv[]) {
         }
         size++;
     }
+    //hashtable.print();
+    //bst.printInOrder();
+    Airline* wtf = new Airline("wtf Air");
+    Airline* cathay = new Airline("Cathay Dragon");
+    cout << "search wtf: " << bst.search(wtf) << endl;
+    cout << "remove wtf: " << bst.deleteNode(wtf) << endl;
+    cout << "remove cathay: " << bst.deleteNode(cathay) << endl;
+    cout << "remove cathay again: " << bst.deleteNode(cathay) << endl;
+    cout << "search cathay: " << bst.search(cathay);
+    bst.printInOrder();
+
     airInput.close();
     cout<<"Type insert followed by an Airline object on the next line to update the database. Type delete, search, or print stats followed by the name of an Airline on the next line to check the database and display all airline information. Type display hash table, display in order, print indented tree, print efficiency to display Airlines in various formats. Type recommend to recommend top 3 airlines. Type quit to exit the program."<<endl;
     string input;
@@ -163,7 +171,8 @@ int main(int argc, const char * argv[]) {
             }
             cin >> onTimePercentage;
             cin >> numAnnualCompTemp;
-            Airline curr(name,destListTemp, numDestTemp, onTimePercentage, numAnnualCompTemp);
+            Airline* curr = new Airline(name,destListTemp, numDestTemp, onTimePercentage, numAnnualCompTemp);
+            
             bst.insertNode(curr);
             hashtable.insert(curr);
             linkedlist.appendNode(curr);
@@ -174,8 +183,11 @@ int main(int argc, const char * argv[]) {
         {
             std::string name;
             getline(cin,name);
-            Airline temp = hashtable.find(Airline(name));
-            if(!(temp == Airline()))
+            
+            Airline* searchPtr = new Airline(name);
+            auto temp = hashtable.find(searchPtr);
+            
+            if(!(temp == nullptr))
             {
                 bst.deleteNode(temp);
                 hashtable.remove(temp);
@@ -191,9 +203,10 @@ int main(int argc, const char * argv[]) {
         {
             std::string name;
             getline(cin,name);
-            Airline temp = hashtable.find(Airline(name));
+            Airline* searchPtr = new Airline(name);
+            auto temp = hashtable.find(searchPtr);
             bst.search(temp);
-            if(!(temp == Airline()))
+            if(!(temp == nullptr))
             {
                 cout<<temp<<endl;
             }
@@ -207,11 +220,11 @@ int main(int argc, const char * argv[]) {
         {
             std::string name;
             getline(cin,name);
-            Airline temp = hashtable.find(Airline(name));
-            bst.search(temp);
-            if(!(temp == Airline()))
+            Airline* searchPtr = new Airline(name);
+            auto temp = hashtable.find(searchPtr);
+            if(!(temp == nullptr))
             {
-                temp.printStats();
+                temp->printStats();
             }
             else
             {
@@ -235,7 +248,6 @@ int main(int argc, const char * argv[]) {
             cout<<"Hash table"<<endl;
             cout<<"load factor: "<<hashtable.getLoadFactor()<<endl;
             cout<<"longest linked list:"<<hashtable.getLongestList()<<endl;
-            cout<<"average linked list size:"<<hashtable.getLongestList()<<endl;
             cout<<"BST"<<endl;
             cout<<"Average operations per insertion: "<<bst.getInsertionOperations()*1.0/bst.getInsertionQueries()<<endl;
             if(bst.getSearchQueries()>0)
@@ -261,7 +273,7 @@ int main(int argc, const char * argv[]) {
     ofstream airOutput(fileName);
     while(!linkedlist.isEmpty())
     {
-        linkedlist.getStart()->data.printObject(airOutput);
+        linkedlist.getStart()->data->printObject(airOutput);
         linkedlist.deleteNode(linkedlist.getStart()->data);
     }
     system("pause");
