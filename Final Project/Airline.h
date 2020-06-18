@@ -1,4 +1,3 @@
-//Keith
 #ifndef Airline_h
 #define Airline_h
 
@@ -25,7 +24,7 @@ public:
     Airline(string nme, string* dest = nullptr, int numDest = 0, double onTime = 0.0, int numAnnComp = 0);
     
     //Dtor
-    ~Airline() { }
+    ~Airline() { std::cout<<"dtor called: "<< this << std::endl;}
     
     //Member functions
     
