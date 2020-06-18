@@ -1,4 +1,3 @@
-//Keith
 #ifndef BSTNode_h
 #define BSTNode_h
 
@@ -8,24 +7,24 @@ template<typename T>
 class BSTNode
 {
 private:
-    T* data;
+    T data;
     BSTNode<T>* left;
     BSTNode<T>* right;
 public:
     //Ctor
     BSTNode() : left(nullptr), right(nullptr){ }
-    BSTNode(T inputData) : data(new T(inputData)), left(nullptr), right(nullptr) { }
+    BSTNode(T inputData) : data(inputData), left(nullptr), right(nullptr) { }
     
     //Dtor
-    ~BSTNode() { delete data; }
+    ~BSTNode() = default;
     
     //Getters
-    T getData() const { return *data; }
+    T getData() const { return data; }
     BSTNode<T>*& getLeft() { return left; }
     BSTNode<T>*& getRight() { return right; }
     
     //Setters
-    void setData(const T inputData) { *data = inputData; }
+    void setData(const T inputData) { data = inputData; }
     void setLeft(BSTNode<T>* inputNode) { left = inputNode; }
     void setRight(BSTNode<T>* inputNode) { right = inputNode; }
     
