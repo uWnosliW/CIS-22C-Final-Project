@@ -128,7 +128,6 @@ int main(int argc, const char * argv[]) {
             //bst.printInOrder();
             linkedlist.appendNode(temp);
             hashtable.insert(temp);
-            //delete [] destListTemp;
         }
         catch(...)
         {
@@ -169,7 +168,6 @@ int main(int argc, const char * argv[]) {
             hashtable.insert(curr);
             linkedlist.appendNode(curr);
             cout<<name<<" inserted into database."<<endl;
-            delete[] destListTemp;
         }
         else if(input == "delete")
         {
