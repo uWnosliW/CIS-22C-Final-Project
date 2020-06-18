@@ -401,7 +401,7 @@ void SinglyLinkedList<T>::printTop3() const
                 {
                      for (int j = 0; j < arr_size-i-1; j++)
                      {
-                         if (top3arr[j] > top3arr[j+1])
+                         if (*top3arr[j] > *top3arr[j+1])
                         {
                             T temp = top3arr[j];
                             top3arr[j] = top3arr[j+1];
@@ -410,7 +410,7 @@ void SinglyLinkedList<T>::printTop3() const
                      }
                 }
 
-                if(top3arr[i] < temp)
+                if(*top3arr[i] < *temp)
                 {
                     top3arr[i] = temp;
                     break;
