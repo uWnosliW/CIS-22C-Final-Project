@@ -128,7 +128,7 @@ int main(int argc, const char * argv[]) {
             //bst.printInOrder();
             linkedlist.appendNode(temp);
             hashtable.insert(temp);
-            delete [] destListTemp;
+            //delete [] destListTemp;
         }
         catch(...)
         {
@@ -270,5 +270,7 @@ int main(int argc, const char * argv[]) {
     }
     system("pause");
     return 0;
+}
+
 }
 
