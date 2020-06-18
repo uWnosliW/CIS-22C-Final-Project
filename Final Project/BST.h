@@ -152,6 +152,7 @@ BSTNode<T>* BST<T>::search(BSTNode<T>* nodePtr, T inputData)
     searchOperations++;
     T data = nodePtr->getData();
     //std::cout<<"searching "<<data<<endl;
+    if (inputData == nullptr) { return nullptr; }
     if(*data == *inputData)
     {
         return nodePtr;
